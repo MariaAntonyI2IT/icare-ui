@@ -6,7 +6,7 @@ import sagas from './sagas';
 const sagaMiddleware = createSagaMiddleware()
 const store = configureStore({
   reducer, 
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(sagaMiddleware),
 });
 sagaMiddleware.run(sagas);
 export default store;

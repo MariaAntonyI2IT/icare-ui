@@ -1,0 +1,65 @@
+@import "./../../../styles/variables";
+
+.ic-org-signup-container {
+  .ic-org-signup-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .ic-name-wrapper {
+      display: flex;
+      min-width: 100%;
+      justify-content: center;
+      position: relative;
+      .ic-name {
+        font-size: 20px;
+        font-weight: 600;
+        padding: 15px 15px;
+        color: $app-primary-color;
+      }
+      .ic-bck-icon {
+        position: absolute;
+        left: 10px;
+        top: 3px;
+        color: $app-primary-color;
+        font-weight: bolder;
+      }
+    }
+    
+    .ic-form-fields,
+    .ic-btn {
+      padding: 10px 20px;
+      min-width: 100%;
+    }
+
+    .ic-btn button {
+      min-width: 100%;
+    }
+
+    .otp-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .ic-resend-otp {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      width: 100%;
+      .ic-resend-otp-content {
+        font-weight: 300;
+      }
+      .ic-resend-otp-link {
+        line-height: 1rem;
+        font-size: 16px;
+        cursor: pointer;
+        display: block;
+        font-weight: 500;
+        color: $app-primary-color;
+      }
+    }
+  }
+}

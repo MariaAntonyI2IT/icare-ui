@@ -1,3 +1,90 @@
-body {
-  color: lightblue;
+@import "./../../styles/variables";
+
+.ic-login-container {
+  .ic-login-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .ic-name {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 15px 15px;
+      color: $app-primary-color;
+    }
+    .ic-form-fields,
+    .ic-login {
+      padding: 10px 20px;
+      min-width: 100%;
+    }
+
+    .ic-login button {
+      min-width: 100%;
+    }
+  }
+  .ic-fp {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    font-weight: 500;
+    color: $app-primary-color;
+  }
+
+  .ic-signup {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    .ic-singnup-content {
+      font-weight: 300;
+    }
+    .ic-singnup-link {
+      line-height: 1rem;
+      font-size: 16px;
+      display: block;
+      font-weight: 500;
+      color: $app-primary-color;
+    }
+  }
+
+  .ic-brk-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    padding: 10px 0;
+    .ic-brk {
+      min-width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-weight: 500;
+      margin: 0;
+      padding: 10px 20px;
+
+      &::after,
+      &::before {
+        content: "";
+        border-bottom: 1px solid #000;
+        flex: 1 0 auto;
+        height: 0;
+        margin: 0;
+      }
+      span {
+        display: flex;
+        text-align: center;
+        flex: 0.2 0 auto;
+        justify-content: center;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .ic-btn-google {
+    padding: 10px 20px;
+  }
+
+  .ic-btn-google button {
+    min-width: 100%;
+  }
 }

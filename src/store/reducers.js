@@ -1,7 +1,9 @@
 import userReducer from './user/reducer';
+import appReducer from './app/reducer';
 
 const reducers = {
-  user: userReducer
+  user: userReducer,
+  app: appReducer
 };
 
 export default reducers;

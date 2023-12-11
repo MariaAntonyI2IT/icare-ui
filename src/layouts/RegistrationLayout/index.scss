@@ -1,0 +1,43 @@
+@import "./../../styles/variables";
+
+.ic-registration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8fd;
+  min-height: inherit;
+  padding: 15px;
+
+  .ic-header-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    .ic-header-logo {
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .ic-header-name {
+      font-size: 36px;
+      font-weight: 600;
+      color: $app-primary-color;
+    }
+  }
+
+  .ic-body-container {
+    box-shadow: 0em 0em 1px rgba(255, 255, 255, 0.25),
+      inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+    padding: 10px 0 10px 0;
+    height: 550px;
+    margin-bottom: 20px;
+    position: relative;
+    @media only screen and (min-width: 550px) {
+      width: 450px;
+    }
+    @media only screen and (max-width: 550px) {
+      min-width: 100%;
+    }
+  }
+}

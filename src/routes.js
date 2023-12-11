@@ -1,31 +1,21 @@
-import {createBrowserRouter,Link} from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import Login from './components/Login';
-import Logout from './components/Logout';
-import Button from '@material-ui/core/Button';
+import Dashboard from './components/Dashboard';
+import CreateAccount from './components/CreateAccount';
 
 const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
   },{
-    path: "/logout",
-    element: <Logout />
+    path: "/create-account",
+    element: <CreateAccount />
+  },{
+    path: "/dashboard",
+    element: <Dashboard />
   },{
     path: "/",
-    element: (<>
-    <Button variant="contained" color="primary">
-  Primary
-</Button>
-      <nav>
-        <ul>
-          <li>
-            <Link to={`login`}>Login</Link>
-          </li>
-          <li>
-            <Link to={`logout`}>Logout</Link>
-          </li>
-        </ul>
-      </nav></>)
+    element: <Login />
   }
 ]);
 

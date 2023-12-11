@@ -1,0 +1,25 @@
+@import "./../../styles/variables";
+
+.ic-forgot-password-container {
+  .ic-forgot-password-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .ic-name {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 15px 15px;
+      color: $app-primary-color;
+    }
+    .ic-form-fields,
+    .ic-forgot-password {
+      padding: 10px 20px;
+      min-width: 100%;
+    }
+
+    .ic-forgot-password button {
+      min-width: 100%;
+    }
+  }
+}
