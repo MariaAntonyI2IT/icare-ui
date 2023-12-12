@@ -64,7 +64,7 @@ export default function Login() {
         case "email":
           if (!value) {
             form[field].error = "Please enter Email/UID";
-          } else if (!value.match(appConfig.mailRegex)) {
+          } else if (value.indexOf('IC-') !== 0 && !value.match(appConfig.mailRegex)) {
             form[field].error = "Please enter valid Email/UID";
           }
           break;

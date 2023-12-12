@@ -1,0 +1,43 @@
+@import "./../../styles/variables";
+
+.ic-header-container {
+  height: 80px;
+  box-shadow: 0 5px 3px -5px grey;
+  display: flex;
+  justify-content: space-between;
+
+  .ic-header-name-wrapper {
+    padding-left: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    .ic-header-logo {
+      img {
+        transform: rotate(-45deg);
+        width: 80px;
+        height: 80px;
+      }
+    }
+    .ic-header-name {
+      font-size: 36px;
+      font-weight: 600;
+      color: $app-primary-color;
+    }
+  }
+  .ic-profile {
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    svg {
+      height: 2rem;
+      width: 2rem;
+    }
+    img {
+      cursor: pointer;
+      margin-right: 15px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+  }
+}

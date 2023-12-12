@@ -20,3 +20,9 @@ export const loginGoogle = async (accessToken) => {
   );
   return await response.json();
 };
+
+export const fetchProfile = () =>
+  axios({
+    method: 'get',
+    url: '/user-service/user/profile'
+  });

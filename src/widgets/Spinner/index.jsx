@@ -1,9 +1,9 @@
 import { ThreeDots } from "react-loader-spinner";
 import "./index.scss";
 
-export default function Spinner({ loading, fullViewPort = true }) {
+export default function Spinner({ loading, fullViewPort = true, bg }) {
   return loading ? (
-    <div className={`spinner-backdrop ${fullViewPort ? 'fullscreen' : ''}`}>
+    <div className={`spinner-backdrop ${bg || ''} ${fullViewPort ? 'fullscreen' : ''}`}>
       <ThreeDots
         height="80"
         width="80"

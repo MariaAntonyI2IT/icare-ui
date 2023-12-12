@@ -1,7 +1,9 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter,Navigate} from "react-router-dom";
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import Profile from './components/Profile';
 import CreateAccount from './components/CreateAccount';
+import ProtectedRoute from './protectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -12,10 +14,22 @@ const router = createBrowserRouter([
     element: <CreateAccount />
   },{
     path: "/dashboard",
-    element: <Dashboard />
+    element: <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
   },{
-    path: "/",
-    element: <Login />
+    path: "/profile",
+    element: <ProtectedRoute>
+      <Profile />
+    </ProtectedRoute>
+  },
+  {
+    path: '/',
+    element: <Navigate replace to="/dashboard" />
+  },
+  {
+    path: '*',
+    element: <Navigate replace to="/dashboard" />
   }
 ]);
 

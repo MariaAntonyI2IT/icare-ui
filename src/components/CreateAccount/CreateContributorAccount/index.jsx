@@ -47,6 +47,13 @@ export default function CreateContributorAccount() {
       isMandatory: false,
       category: "account",
     },
+    phoneNumber: {
+      value: "",
+      error: "",
+      dirty: false,
+      isMandatory: true,
+      category: "account",
+    },
     otp: {
       value: "",
       error: "",
@@ -110,6 +117,11 @@ export default function CreateContributorAccount() {
             form[field].error = "Please enter OTP";
           } else if (value.length !== 6) {
             form[field].error = "OTP should be 6 digit";
+          }
+          break;
+        case "phoneNumber":
+          if (value && value.length !== 10) {
+            form[field].error = "Phone number should be 10 digit";
           }
           break;
         case "password":
@@ -231,6 +243,7 @@ export default function CreateContributorAccount() {
         email: formObj.email.value,
         firstName: formObj.firstName.value,
         lastName: formObj.lastName.value,
+        phoneNumber: formObj.phoneNumber.value,
       };
       dispatch(
         registerContributor(

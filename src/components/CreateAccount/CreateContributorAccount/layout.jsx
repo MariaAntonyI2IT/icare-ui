@@ -50,6 +50,19 @@ export const RegistrationComponent = ({
         />
         <div className="ic-form-error-msg">{formObj.lastName.error}</div>
       </div>
+      <div className="ic-form-fields">
+        <TextField
+          error={formObj.phoneNumber.dirty && !!formObj.phoneNumber.error}
+          value={formObj.phoneNumber.value}
+          onChange={(e) => onValueChange(e, "phoneNumber")}
+          label="Phone Number (Optional)"
+          variant="outlined"
+          autoComplete="new-password"
+          type={"number"}
+          fullWidth={true}
+        />
+        <div className="ic-form-error-msg">{formObj.phoneNumber.error}</div>
+      </div>
       <TextField value={"mock"} className={"ic-hide-form"} />
       <div className="ic-btn">
         <Button variant="contained" onClick={() => sendOtpForm()}>

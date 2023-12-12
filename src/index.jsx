@@ -6,8 +6,11 @@ import { setupInterceptors } from "./services/interceptor";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import App from "./App";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { updateToken } from "./store/user/reducer";
+import { getSession } from "./utils/session";
 import "./styles/index.scss";
 import "./styles/widget.scss";
+import { appConfig } from "./utils/constants";
 
 const theme = createTheme({
   palette: {
@@ -16,6 +19,10 @@ const theme = createTheme({
     },
   },
 });
+const token = getSession(appConfig.token);
+if (!!token) {
+  store.dispatch(updateToken(token));
+}
 setupInterceptors(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,6 +1,6 @@
 import {
   GOOGLE_LOGIN_USER_REQUESTED,LOGIN_USER_REQUESTED,REGISTER_CONTRIBUTOR_REQUESTED,
-  REGISTER_ORGANIZATION_REQUESTED,VERIFY_ORGANIZATION_REQUESTED,FORGOT_PASSWORD_REQUESTED,VERIFY_OTP_REQUESTED,SEND_OTP_REQUESTED
+  REGISTER_ORGANIZATION_REQUESTED,VERIFY_ORGANIZATION_REQUESTED,FORGOT_PASSWORD_REQUESTED,VERIFY_OTP_REQUESTED,SEND_OTP_REQUESTED,FETCH_PROFILE_REQUESTED, CLEAR_PROFILE_REQUESTED
 } from './actionTypes';
 
 export const loginUser = (payload,successCb,failureCb) => ({
@@ -62,4 +62,15 @@ export const verifyOtp = (payload,successCb,failureCb) => ({
   payload,
   successCb,
   failureCb
+});
+
+export const fetchProfileDetails = (payload,successCb,failureCb) => ({
+  type: FETCH_PROFILE_REQUESTED,
+  payload,
+  successCb,
+  failureCb
+});
+
+export const clearProfile = () => ({
+  type: CLEAR_PROFILE_REQUESTED
 });
