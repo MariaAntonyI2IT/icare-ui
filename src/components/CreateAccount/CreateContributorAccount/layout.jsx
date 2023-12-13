@@ -1,11 +1,13 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 export const RegistrationComponent = ({
   onValueChange,
   onBlur,
   sendOtpForm,
   formObj,
+  loading,
 }) => {
   return (
     <>
@@ -65,9 +67,14 @@ export const RegistrationComponent = ({
       </div>
       <TextField value={"mock"} className={"ic-hide-form"} />
       <div className="ic-btn">
-        <Button variant="contained" onClick={() => sendOtpForm()}>
+        <LoadingButton
+          variant="contained"
+          loading={loading}
+          onClick={() => sendOtpForm()}
+          loadingPosition="start"
+        >
           Next
-        </Button>
+        </LoadingButton>
       </div>
     </>
   );
@@ -79,6 +86,7 @@ export const OtpComponent = ({
   verifyOtpForm,
   sendOtpForm,
   formObj,
+  loading,
 }) => (
   <>
     <div className="otp-wrapper">
@@ -99,9 +107,14 @@ export const OtpComponent = ({
         </div>
       </div>
       <div className="ic-btn">
-        <Button variant="contained" onClick={() => verifyOtpForm()}>
+        <LoadingButton
+          variant="contained"
+          loading={loading}
+          onClick={() => verifyOtpForm()}
+          loadingPosition="start"
+        >
           Verify
-        </Button>
+        </LoadingButton>
       </div>
     </div>
     <div className="ic-resend-otp">

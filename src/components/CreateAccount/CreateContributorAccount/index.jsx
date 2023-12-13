@@ -8,7 +8,6 @@ import {
   verifyOtp,
 } from "../../../store/user/action";
 import { appConfig } from "../../../utils/constants";
-import Spinner from "../../../widgets/Spinner";
 import {
   OtpComponent,
   PasswordComponent,
@@ -276,7 +275,6 @@ export default function CreateContributorAccount() {
 
   return (
     <>
-      <Spinner loading={loading} fullViewPort={false} />
       <div className="ic-contributor-signup-container">
         {alertObj.open ? (
           <ShowAlert
@@ -286,7 +284,11 @@ export default function CreateContributorAccount() {
             handleAlertClose={() => handleAlertClose()}
           />
         ) : null}
-        <div className="ic-contributor-signup-wrapper">
+        <div
+          className={`ic-contributor-signup-wrapper ${
+            loading ? "loading" : ""
+          }`}
+        >
           <div className="ic-name">Create Account</div>
           {!accVerified ? (
             <RegistrationComponent
@@ -294,6 +296,7 @@ export default function CreateContributorAccount() {
               onValueChange={onValueChange}
               sendOtpForm={sendOtpForm}
               formObj={formObj}
+              loading={loading}
             />
           ) : !otpVerified ? (
             <OtpComponent
@@ -302,6 +305,7 @@ export default function CreateContributorAccount() {
               sendOtpForm={sendOtpForm}
               verifyOtpForm={verifyOtpForm}
               formObj={formObj}
+              loading={loading}
             />
           ) : (
             <PasswordComponent

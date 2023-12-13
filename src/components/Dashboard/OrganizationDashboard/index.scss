@@ -1,0 +1,116 @@
+@import "./../../../styles/variables";
+
+.ic-org-dashboard-container {
+  width: 100%;
+
+  .ic-org-header-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 30px;
+
+    .ic-card-wrapper {
+      display: flex;
+      @media only screen and (max-width: 1100px) {
+        .ic-card-name,
+        .ic-card-badge {
+          display: none;
+        }
+        .ic-card {
+          width: 80px;
+          border-radius: 50%;
+        }
+        .ic-card-content {
+          justify-content: center;
+        }
+      }
+      @media only screen and (min-width: 1100px) {
+        .ic-card {
+          width: 300px;
+        }
+        .ic-card-badge {
+          display: flex;
+        }
+        .ic-card-content {
+          justify-content: flex-start;
+        }
+      }
+      .ic-card {
+        display: flex;
+        align-items: center;
+        margin: 0 25px;
+        height: 80px;
+        position: relative;
+        &:hover{
+          background-color: #f9f9f9;
+        }
+        .ic-card-content {
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          svg {
+            font-size: 45px;
+            color: $app-primary-color;
+          }
+          .ic-card-name {
+            font-size: 18px;
+            font-weight: 500;
+            padding: 0 5px;
+          }
+
+          .ic-card-badge {
+            position: absolute;
+            right: 20px;
+            width: 25px;
+            height: 25px;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: bolder;
+            color: #fff;
+            border-radius: 50%;
+            background-color: $app-primary-color;
+            box-shadow: 0em 0em 1px rgba(255, 255, 255, 0.25),
+              inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+          }
+        }
+      }
+    }
+  }
+  .ic-org-body-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .ic-org-feed-container {
+      .ic-org-body-header {
+        font-size: 20px;
+        font-weight: 600;
+        padding: 15px 15px;
+        color: $app-primary-color;
+        display: flex;
+        justify-content: center;
+      }
+
+      .ic-org-feed-content {
+        .ic-card {
+          padding: 16px 20px;
+          margin: 25px 10px;
+          .ic-card-content {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .ic-card-icon {
+              color: $app-primary-color;
+            }
+            .ic-card-info {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -38,7 +38,7 @@ export default function OrganizerProfile() {
         <div className="ic-form-fields">
           <TextField
             value={organizerProfile.name}
-            label="Email"
+            label="Name"
             variant="outlined"
             autoComplete="new-password"
             inputprops={{

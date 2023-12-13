@@ -6,7 +6,7 @@ export const login = (username,password) => {
   data.append('password',password);
   return axios({
     method: 'POST',
-    url: '/auth-service/session',
+    url: '/login',
     data,
     headers: {'Content-Type': 'multipart/form-data'}
   });
@@ -23,6 +23,6 @@ export const loginGoogle = async (accessToken) => {
 
 export const fetchProfile = () =>
   axios({
-    method: 'get',
-    url: '/user-service/user/profile'
+    method: 'post',
+    url: '/profile'
   });

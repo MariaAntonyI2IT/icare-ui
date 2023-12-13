@@ -6,8 +6,24 @@
   display: flex;
   justify-content: space-between;
 
+  @media only screen and (min-width: 550px) {
+    .ic-header-name-wrapper {
+      padding-left: 15px;
+    }
+    .ic-profile {
+      padding-right: 20px;
+    }
+  }
+  @media only screen and (max-width: 550px) {
+    .ic-header-name-wrapper {
+      padding-left: 0px;
+    }
+    .ic-profile {
+      padding-right: 0;
+    }
+  }
+
   .ic-header-name-wrapper {
-    padding-left: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -25,12 +41,12 @@
     }
   }
   .ic-profile {
-    padding-right: 20px;
     display: flex;
     align-items: center;
     svg {
       height: 2rem;
       width: 2rem;
+      color: $app-primary-color;
     }
     img {
       cursor: pointer;

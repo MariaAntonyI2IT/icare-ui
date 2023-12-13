@@ -36,14 +36,14 @@ function* loginUser(action) {
       const {
         headers: {authorization: token}
       } = yield call(login,email,hashedPassword);
+
       setSession(appConfig.token,token);
       yield put(updateToken(token));
       const {
         data: {
-          entity: {
-            firstName,
-            lastName
-          }
+          firstName,
+          lastName,
+          username
         }
       } = yield call(fetchProfile);
       const mockData = {
@@ -51,13 +51,13 @@ function* loginUser(action) {
         firstName,
         lastName
       }
-      yield call(mockApi,100);
+      yield call(mockApi,1500);
       yield put(updateContributorProfile(mockData));
     }
     yield put(disableLoader());
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(updateLoggedIn(false));
     yield put(disableLoader());
     action?.failureCb(e.response?.data?.message || e.message);
@@ -90,7 +90,7 @@ function* fetchProfileDetails(action) {
   } catch(e) {
     yield put(updateInitialized(true))
     yield put(updateLoggedIn(false));
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
   }
 }
@@ -107,13 +107,13 @@ function* loginGoogleUser(action) {
       lastName: profile.family_name,
       avatar: profile.picture
     }
-    console.log(profile);
+    console.log("accessToken", accessToken);
     yield put(updateContributorProfile(mockData));
     yield put(disableLoader());
     action?.successCb();
   } catch(e) {
     yield put(updateLoggedIn(false));
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.failureCb(e.response?.data?.message || e.message);
   }
@@ -122,11 +122,11 @@ function* loginGoogleUser(action) {
 function* rgisterContributor(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.failureCb(e.message);
   }
@@ -135,11 +135,11 @@ function* rgisterContributor(action) {
 function* rgisterOrganization(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.failureCb(e.message);
   }
@@ -147,7 +147,7 @@ function* rgisterOrganization(action) {
 
 function* verifyOrganization(action) {
   try {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     const mockData = {
       uid: 'IC-2666',
       name: 'BRAVE VISION SPORTS FOUNDATION',
@@ -158,7 +158,7 @@ function* verifyOrganization(action) {
     };
     action?.successCb(mockData);
   } catch(e) {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     action?.failureCb(e.message);
   }
 }
@@ -166,11 +166,11 @@ function* verifyOrganization(action) {
 function* forgotPassword(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.failureCb(e.message);
   }
@@ -178,20 +178,20 @@ function* forgotPassword(action) {
 
 function* sendOtp(action) {
   try {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     action?.failureCb(e.message);
   }
 }
 
 function* verifyOtp(action) {
   try {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,100);
+    yield call(mockApi,1500);
     action?.failureCb(e.message);
   }
 }

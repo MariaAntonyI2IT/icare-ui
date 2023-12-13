@@ -6,6 +6,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    &.loading {
+      pointer-events: none;
+    }
+    
     .ic-name-wrapper {
       display: flex;
       min-width: 100%;

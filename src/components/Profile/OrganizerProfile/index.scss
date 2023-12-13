@@ -19,7 +19,8 @@
     top: -40px;
     left: calc(50% - 40px);
     .ic-profile-avatar {
-      background-color: #e2e2e2;
+      background-color: $app-primary-color;
+      color: #fff;
       font-size: 25px;
       font-weight: 500;
       justify-content: center;
@@ -27,8 +28,8 @@
       align-items: center;
       width: 80px;
       height: 80px;
-      box-shadow: 0em 0em 1px rgba(255, 255, 255, 0.25),
-        inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+      box-shadow: 0em 0em 1px $app-primary-color,
+        inset 0px 0px 5px $app-primary-color;
       border-radius: 50%;
     }
   }

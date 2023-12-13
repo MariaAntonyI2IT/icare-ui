@@ -4,8 +4,8 @@
   min-height: 100vh;
 
   .ic-body-container {
-    padding: 30px;
+    display: flex;
     background-color: #f8f8fd;
     min-height: calc(100vh - 80px);
-    }
+  }
 }

@@ -1,11 +1,13 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 export const NGOForm = ({
   onValueChange,
   onBlur,
   verifyNgoOrganization,
   formObj,
+  loading,
 }) => {
   return (
     <>
@@ -26,15 +28,20 @@ export const NGOForm = ({
       </div>
       <TextField value={"mock"} className={"ic-hide-form"} />
       <div className="ic-btn">
-        <Button variant="contained" onClick={() => verifyNgoOrganization()}>
+        <LoadingButton
+          variant="contained"
+          loading={loading}
+          onClick={() => verifyNgoOrganization()}
+          loadingPosition="start"
+        >
           Verify
-        </Button>
+        </LoadingButton>
       </div>
     </>
   );
 };
 
-export const RegistrationComponent = ({ formObj, sendOtpForm }) => {
+export const RegistrationComponent = ({ formObj, sendOtpForm, loading }) => {
   return (
     <>
       <div className="ic-form-fields">
@@ -88,9 +95,14 @@ export const RegistrationComponent = ({ formObj, sendOtpForm }) => {
         />
       </div>
       <div className="ic-btn">
-        <Button variant="contained" onClick={() => sendOtpForm()}>
+        <LoadingButton
+          variant="contained"
+          loading={loading}
+          onClick={() => sendOtpForm()}
+          loadingPosition="start"
+        >
           Next
-        </Button>
+        </LoadingButton>
       </div>
     </>
   );
@@ -102,6 +114,7 @@ export const OtpComponent = ({
   verifyOtpForm,
   sendOtpForm,
   formObj,
+  loading,
 }) => (
   <>
     <div className="otp-wrapper">
@@ -122,9 +135,14 @@ export const OtpComponent = ({
         </div>
       </div>
       <div className="ic-btn">
-        <Button variant="contained" onClick={() => verifyOtpForm()}>
+        <LoadingButton
+          variant="contained"
+          loading={loading}
+          onClick={() => verifyOtpForm()}
+          loadingPosition="start"
+        >
           Verify
-        </Button>
+        </LoadingButton>
       </div>
     </div>
     <div className="ic-resend-otp">

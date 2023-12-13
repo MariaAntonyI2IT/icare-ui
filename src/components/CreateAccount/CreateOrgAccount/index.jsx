@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ShowAlert from "../../../widgets/Alert";
-import Spinner from "../../../widgets/Spinner";
 import {
   registerOrganization,
   verifyOrganization,
@@ -179,7 +178,7 @@ export default function CreateOrgAccount() {
   };
 
   const verifyNgoOrganization = () => {
-    if (isValidForm('ngo')) {
+    if (isValidForm("ngo")) {
       const obj = {
         ngoId: formObj.ngoId.value,
       };
@@ -313,7 +312,6 @@ export default function CreateOrgAccount() {
 
   return (
     <>
-      <Spinner loading={loading} fullViewPort={false} />
       <div className="ic-org-signup-container">
         {alertObj.open ? (
           <ShowAlert
@@ -323,7 +321,7 @@ export default function CreateOrgAccount() {
             handleAlertClose={() => handleAlertClose()}
           />
         ) : null}
-        <div className="ic-org-signup-wrapper">
+        <div className={`ic-org-signup-wrapper ${loading ? "loading" : ""}`}>
           <div className="ic-name-wrapper">
             {ngoVerified && !accVerified && !otpVerified ? (
               <IconButton
@@ -342,11 +340,13 @@ export default function CreateOrgAccount() {
               onValueChange={onValueChange}
               verifyNgoOrganization={verifyNgoOrganization}
               formObj={formObj}
+              loading={loading}
             />
           ) : !accVerified ? (
             <RegistrationComponent
               sendOtpForm={sendOtpForm}
               formObj={formObj}
+              loading={loading}
             />
           ) : !otpVerified ? (
             <OtpComponent
@@ -355,6 +355,7 @@ export default function CreateOrgAccount() {
               sendOtpForm={sendOtpForm}
               verifyOtpForm={verifyOtpForm}
               formObj={formObj}
+              loading={loading}
             />
           ) : (
             <PasswordComponent
