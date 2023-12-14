@@ -18,7 +18,7 @@ export const userSlice = createSlice({
     organizationProfile: {
       uid: '',
       ngoId: '',
-      regNo: '',
+      registrationNumber: '',
       email: '',
       name: '',
       state: '',
@@ -51,6 +51,20 @@ export const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = '';
       state.userProfile = '';
+      state.contributorProfile.avatar = '';
+      state.contributorProfile.email = '';
+      state.contributorProfile.firstName = '';
+      state.contributorProfile.lastName = '';
+      state.contributorProfile.phoneNumber = '';
+      state.organizationProfile.address = '';
+      state.organizationProfile.avatar = '';
+      state.organizationProfile.city = '';
+      state.organizationProfile.email = '';
+      state.organizationProfile.name = '';
+      state.organizationProfile.ngoId = '';
+      state.organizationProfile.registrationNumber = '';
+      state.organizationProfile.state = '';
+      state.organizationProfile.uid = '';
     }
   },
 });

@@ -52,7 +52,7 @@ export default function CreateOrgAccount() {
       isMandatory: false,
       category: "account",
     },
-    regNo: {
+    registrationNumber: {
       value: "",
       error: "",
       dirty: false,

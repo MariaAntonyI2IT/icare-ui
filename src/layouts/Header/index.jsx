@@ -3,7 +3,7 @@ import logo from "./../../assets/logo.png";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { clearProfile } from "./../../store/user/action";
 import Logout from "@mui/icons-material/Logout";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import IconButton from "@mui/material/IconButton";
 import { clearSession } from "./../../utils/session";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,11 @@ export default function Header() {
       </div>
       <div className="ic-profile">
         {avatar ? (
-          <img src={avatar} alt={"Avatar"} />
+          <img
+            src={avatar}
+            alt={"Avatar"}
+            onClick={() => onProfileBtnClick()}
+          />
         ) : (
           <IconButton
             className="ic-bck-icon"
@@ -55,10 +59,7 @@ export default function Header() {
         >
           <Logout />
         </IconButton>
-        <IconButton
-          className="ic-bck-icon"
-          size="large"
-        >
+        <IconButton className="ic-bck-icon" size="large">
           <NotificationsIcon />
         </IconButton>
       </div>

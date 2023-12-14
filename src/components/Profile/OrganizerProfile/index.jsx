@@ -29,9 +29,7 @@ export default function OrganizerProfile() {
             label="Email"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -41,9 +39,7 @@ export default function OrganizerProfile() {
             label="Name"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -53,21 +49,17 @@ export default function OrganizerProfile() {
             label="NGO ID"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
         <div className="ic-form-fields">
           <TextField
-            value={organizerProfile.regNo}
+            value={organizerProfile.registrationNumber}
             label="Registration Number"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -77,9 +69,7 @@ export default function OrganizerProfile() {
             label="State"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -89,9 +79,7 @@ export default function OrganizerProfile() {
             label="City"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -102,9 +90,7 @@ export default function OrganizerProfile() {
             label="Address"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>

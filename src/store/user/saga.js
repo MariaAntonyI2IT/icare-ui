@@ -16,49 +16,29 @@ import {setSession} from '../../utils/session';
 function* loginUser(action) {
   try {
     yield put(enableLoader());
+    yield put(updateInitialized(false));
+    yield put(updateLoggedIn(false));
     const {email,password} = action.payload;
     const hmac = CryptoJS.HmacSHA512(password,process.env.REACT_APP_PASSWORD_HASH_KEY);
     const hashedPassword = hmac.toString(CryptoJS.enc.Hex);
-    if(email.indexOf('IC-') === 0) {
-      const mockData = {
-        uid: 'IC-2666',
-        name: 'BRAVE VISION SPORTS FOUNDATION',
-        regNo: 'U85300TN2021NPL148796',
-        ngoId: 'TN/2022/0316055',
-        state: 'TAMIL NADU',
-        city: 'CHENNAI',
-        address: '8/18, VENKATESHWARA NAGAR, 5th MAIN ROID, MGR NAGAR, VELACHERRY',
-        email: 'sbravevisionsportsacademy21@gmail.com'
-      };
-      yield call(mockApi,1000);
-      yield put(updateOrganizationProfile(mockData));
+    const {
+      headers: {authorization: token}
+    } = yield call(login,email,hashedPassword);
+    setSession(appConfig.token,token);
+    yield put(updateToken(token));
+    const {data} = yield call(fetchProfile);
+    if(data.contributor) {
+      yield put(updateContributorProfile(data.contributor));
     } else {
-      const {
-        headers: {authorization: token}
-      } = yield call(login,email,hashedPassword);
-
-      setSession(appConfig.token,token);
-      yield put(updateToken(token));
-      const {
-        data: {
-          firstName,
-          lastName,
-          username
-        }
-      } = yield call(fetchProfile);
-      const mockData = {
-        email,
-        firstName,
-        lastName
-      }
-      yield call(mockApi,1500);
-      yield put(updateContributorProfile(mockData));
+      yield put(updateOrganizationProfile(data.organization));
     }
     yield put(disableLoader());
+    yield put(updateLoggedIn(true));
+    yield put(updateInitialized(true));
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,1500);
     yield put(updateLoggedIn(false));
+    yield put(updateInitialized(true));
     yield put(disableLoader());
     action?.failureCb(e.response?.data?.message || e.message);
   }
@@ -66,31 +46,21 @@ function* loginUser(action) {
 
 function* fetchProfileDetails(action) {
   try {
+    yield put(enableLoader());
     yield put(updateInitialized(false));
     yield put(updateLoggedIn(false));
-    yield put(enableLoader());
-    const {
-      data: {
-        entity: {
-          username: email,
-          firstName,
-          lastName
-        }
-      }
-    } = yield call(fetchProfile);
-    const mockData = {
-      email,
-      firstName,
-      lastName
+    const {data} = yield call(fetchProfile);
+    if(data.contributor) {
+      yield put(updateContributorProfile(data.contributor));
+    } else {
+      yield put(updateOrganizationProfile(data.organization));
     }
-    yield put(updateContributorProfile(mockData));
     yield put(disableLoader());
     yield put(updateLoggedIn(true));
     yield put(updateInitialized(true));
   } catch(e) {
     yield put(updateInitialized(true))
     yield put(updateLoggedIn(false));
-    yield call(mockApi,1500);
     yield put(disableLoader());
   }
 }
@@ -98,22 +68,27 @@ function* fetchProfileDetails(action) {
 function* loginGoogleUser(action) {
   try {
     yield put(enableLoader());
+    yield put(updateInitialized(false));
+    yield put(updateLoggedIn(false));
     const {accessToken} = action.payload;
-    const profile = yield call(loginGoogle,accessToken)
-    yield call(mockApi,1000);
-    const mockData = {
-      email: profile.email,
-      firstName: profile.given_name,
-      lastName: profile.family_name,
-      avatar: profile.picture
+    const {
+      headers: {authorization: token}
+    } = yield call(loginGoogle,accessToken);
+    setSession(appConfig.token,token);
+    yield put(updateToken(token));
+    const {data} = yield call(fetchProfile);
+    if(data.contributor) {
+      yield put(updateContributorProfile(data.contributor));
+    } else {
+      yield put(updateOrganizationProfile(data.organization));
     }
-    console.log("accessToken", accessToken);
-    yield put(updateContributorProfile(mockData));
     yield put(disableLoader());
+    yield put(updateLoggedIn(true));
+    yield put(updateInitialized(true));
     action?.successCb();
   } catch(e) {
+    yield put(updateInitialized(true))
     yield put(updateLoggedIn(false));
-    yield call(mockApi,1500);
     yield put(disableLoader());
     action?.failureCb(e.response?.data?.message || e.message);
   }
@@ -151,7 +126,7 @@ function* verifyOrganization(action) {
     const mockData = {
       uid: 'IC-2666',
       name: 'BRAVE VISION SPORTS FOUNDATION',
-      regNo: 'U85300TN2021NPL148796',
+      registrationNumber: 'U85300TN2021NPL148796',
       ngoId: 'TN/2022/0316055',
       state: 'TAMIL NADU',
       email: 'sbravevisionsportsacademy21@gmail.com'

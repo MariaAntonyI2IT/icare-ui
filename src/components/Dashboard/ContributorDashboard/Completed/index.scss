@@ -1,0 +1,12 @@
+@import "./../../../../styles/variables";
+
+.ic-org-completed-container {
+  .ic-org-body-header {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 15px 15px;
+    color: $app-primary-color;
+    display: flex;
+    justify-content: center;
+  }
+}

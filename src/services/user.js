@@ -12,13 +12,14 @@ export const login = (username,password) => {
   });
 };
 
-export const loginGoogle = async (accessToken) => {
-  const response = await fetch(
-    `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${encodeURIComponent(
+
+export const loginGoogle = (accessToken) => {
+  return axios({
+    method: 'POST',
+    url: `/login/oAuth?token=${encodeURIComponent(
       accessToken
     )}`
-  );
-  return await response.json();
+  });
 };
 
 export const fetchProfile = () =>

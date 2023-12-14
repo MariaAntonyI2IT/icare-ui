@@ -9,8 +9,6 @@ export const setupInterceptors = (store) => {
     (request) => {
       const token = store.getState().user.token;
       request.headers.Authorization = token || '';
-      request.headers.tenantId = 0;
-      request.headers['App-Version'] = '1.0.8';
       return request;
     },
     (error) => Promise.reject(error)

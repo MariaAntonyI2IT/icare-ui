@@ -29,9 +29,7 @@ export default function ContributorProfile() {
             label="Email"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -41,9 +39,7 @@ export default function ContributorProfile() {
             label="First Name"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -53,9 +49,7 @@ export default function ContributorProfile() {
             label="Last Name"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>
@@ -65,9 +59,7 @@ export default function ContributorProfile() {
             label="Phone Name"
             variant="outlined"
             autoComplete="new-password"
-            inputprops={{
-              readOnly: true,
-            }}
+            disabled={true}
             fullWidth={true}
           />
         </div>

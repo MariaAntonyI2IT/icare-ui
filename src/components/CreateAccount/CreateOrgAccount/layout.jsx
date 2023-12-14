@@ -66,7 +66,7 @@ export const RegistrationComponent = ({ formObj, sendOtpForm, loading }) => {
       </div>
       <div className="ic-form-fields">
         <TextField
-          value={formObj.regNo.value}
+          value={formObj.registrationNumber.value}
           label="Registration Number"
           variant="outlined"
           autoComplete="new-password"
@@ -183,6 +183,7 @@ export const PasswordComponent = ({
         variant="outlined"
         autoComplete="new-password"
         fullWidth={true}
+        type={'password'}
       />
       <div className="ic-form-error-msg">
         {formObj.password.dirty && formObj.password.error}
@@ -198,6 +199,7 @@ export const PasswordComponent = ({
         variant="outlined"
         autoComplete="new-password"
         fullWidth={true}
+        type={'password'}
       />
       <div className="ic-form-error-msg">
         {formObj.confirmPassword.dirty && formObj.confirmPassword.error}

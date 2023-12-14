@@ -145,6 +145,7 @@ export const PasswordComponent = ({
         variant="outlined"
         autoComplete="new-password"
         fullWidth={true}
+        type={'password'}
       />
       <div className="ic-form-error-msg">
         {formObj.password.dirty && formObj.password.error}
@@ -160,6 +161,7 @@ export const PasswordComponent = ({
         variant="outlined"
         autoComplete="new-password"
         fullWidth={true}
+        type={'password'}
       />
       <div className="ic-form-error-msg">
         {formObj.confirmPassword.dirty && formObj.confirmPassword.error}

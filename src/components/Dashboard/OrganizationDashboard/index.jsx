@@ -8,7 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Create from "./Create";
 import Progress from "./Progress";
 import Completed from "./Completed";
-import { facts } from "./../../../utils/icare";
+import { organizationFacts } from "./../../../utils/icare";
 import "./index.scss";
 
 export default function OrganizationDashboard() {
@@ -28,7 +28,7 @@ export default function OrganizationDashboard() {
     },
     completed: {
       name: "Completed Request",
-      badge: "0",
+      badge: "2",
       selected: false,
       icon: <CheckCircleIcon />,
       component: <Completed />,
@@ -87,7 +87,7 @@ export default function OrganizationDashboard() {
           <div className="ic-org-feed-container">
             <div className="ic-org-body-header">Did you know?</div>
             <div className="ic-org-feed-content">
-              {facts.map((fact) => {
+              {organizationFacts.map((fact) => {
                 return (
                   <div className="ic-card">
                     <div className="ic-card-content">
