@@ -1,6 +1,7 @@
 @import "./../../../../styles/variables";
 
 .ic-org-completed-container {
+  width: 100%;
   .ic-org-body-header {
     font-size: 20px;
     font-weight: 600;
@@ -9,4 +10,123 @@
     display: flex;
     justify-content: center;
   }
+
+  .ic-search {
+    display: flex;
+    justify-content: center;
+    .ic-form-fields {
+      padding: 10px 20px;
+      @media only screen and (min-width: 650px) {
+        width: 550px;
+      }
+      @media only screen and (max-width: 650px) {
+        min-width: 100%;
+      }
+    }
+  }
+
+  .ic-card-container {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .ic-card {
+      @media only screen and (min-width: 650px) {
+        margin: 20px 50px;
+      }
+      @media only screen and (max-width: 650px) {
+        margin: 20px;
+      }
+      width: 400px;
+
+      .ic-card-content {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        .ic-tag-wrapper {
+          position: absolute;
+          right: 0;
+          margin: 10px 15px;
+        }
+
+        .ic-icon {
+          padding: 20px 0px;
+          svg {
+            color: $app-primary-color;
+            font-size: 100px;
+          }
+        }
+
+        .ic-content-wrapper {
+          .ic-name {
+            font-size: 18px;
+            font-weight: 500;
+            padding: 0 10px 0 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .ic-description {
+            font-size: 14px;
+            font-weight: 300;
+            font-style: italic;
+            padding: 10px 10px 15px 15px;
+
+            @media only screen and (min-width: 650px) {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+
+        .ic-footer-wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0px 15px 15px 15px;
+
+          .ic-status-wrapper {
+            display: flex;
+            align-items: center;
+
+            .ic-badge {
+              display: flex;
+              width: 25px;
+              height: 25px;
+              justify-content: center;
+              align-items: center;
+              font-size: 10px;
+              font-weight: bolder;
+              color: #fff;
+              border-radius: 50%;
+              background-color: $app-primary-color;
+              box-shadow: 0em 0em 1px rgba(255, 255, 255, 0.25),
+                inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+            }
+
+            .ic-badge-content {
+              font-size: 14px;
+              font-weight: 400;
+              padding-left: 10px;
+            }
+          }
+
+          .ic-date {
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .ic-no-data {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 20px 0;
+  }
+
 }

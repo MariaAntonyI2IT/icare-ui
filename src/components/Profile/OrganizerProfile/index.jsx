@@ -30,6 +30,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
+            className={'ic-readOnly'}
             fullWidth={true}
           />
         </div>
@@ -40,6 +41,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
+            className={'ic-readOnly'}
             fullWidth={true}
           />
         </div>
@@ -50,6 +52,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
+            className={'ic-readOnly'}
             fullWidth={true}
           />
         </div>
@@ -60,6 +63,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
+            className={'ic-readOnly'}
             fullWidth={true}
           />
         </div>
@@ -70,6 +74,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
+            className={'ic-readOnly'}
             fullWidth={true}
           />
         </div>
@@ -80,6 +85,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
+            className={'ic-readOnly'}
             fullWidth={true}
           />
         </div>
@@ -91,6 +97,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
+            className={'ic-readOnly'}
             fullWidth={true}
           />
         </div>

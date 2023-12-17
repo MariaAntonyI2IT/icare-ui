@@ -15,28 +15,46 @@ export default function ContributorDashboard() {
   const [dashObj, setDashObj] = useState({
     search: {
       name: "Search Request",
+      badge: "",
       selected: false,
       icon: <SearchIcon />,
-      component: <Search />,
+      component: (
+        <Search onDataChange={(data) => onDataChange("search", data)} />
+      ),
     },
     progress: {
       name: "Current Request",
-      badge: "4",
+      badge: "",
       selected: false,
       icon: <PendingIcon />,
-      component: <Progress />,
+      component: (
+        <Progress onDataChange={(data) => onDataChange("progress", data)} />
+      ),
     },
     completed: {
       name: "Completed Request",
-      badge: "1",
+      badge: "",
       selected: false,
       icon: <CheckCircleIcon />,
-      component: <Completed />,
+      component: (
+        <Completed onDataChange={(data) => onDataChange("completed", data)} />
+      ),
     },
   });
   const [dashboard, selectedDashboard] = useState("");
+
+  const onDataChange = (type, data) => {
+    const dash = { ...dashObj };
+    dash[type].badge = data.length.toString();
+    setDashObj(dash);
+  };
+
   const onDashClick = (type) => {
     const obj = { ...dashObj };
+    const keys = Object.keys(obj);
+    for (const field of keys) {
+      obj[field].badge = "";
+    }
     selectDash(obj, type);
     setDashObj(obj);
     selectedDashboard(type);

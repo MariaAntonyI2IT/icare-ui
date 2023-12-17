@@ -16,27 +16,44 @@ export default function OrganizationDashboard() {
     create: {
       name: "Create Request",
       selected: false,
+      badge: "",
       icon: <AddCircleIcon />,
       component: <Create />,
     },
     progress: {
       name: "Current Request",
-      badge: "10",
+      badge: "",
       selected: false,
       icon: <PendingIcon />,
-      component: <Progress />,
+      component: (
+        <Progress onDataChange={(data) => onDataChange("progress", data)} />
+      ),
     },
     completed: {
       name: "Completed Request",
-      badge: "2",
+      badge: "",
       selected: false,
       icon: <CheckCircleIcon />,
-      component: <Completed />,
+      component: (
+        <Completed onDataChange={(data) => onDataChange("completed", data)} />
+      ),
     },
   });
+
   const [dashboard, selectedDashboard] = useState("");
+
+  const onDataChange = (type, data) => {
+    const dash = { ...dashObj };
+    dash[type].badge = data.length.toString();
+    setDashObj(dash);
+  };
+  
   const onDashClick = (type) => {
     const obj = { ...dashObj };
+    const keys = Object.keys(obj);
+    for (const field of keys) {
+      obj[field].badge = "";
+    }
     selectDash(obj, type);
     setDashObj(obj);
     selectedDashboard(type);

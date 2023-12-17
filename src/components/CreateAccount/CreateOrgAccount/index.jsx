@@ -19,6 +19,8 @@ import {
 import "./index.scss";
 
 export default function CreateOrgAccount() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [ngoVerified, setNgoVerified] = useState(false);
   const [accVerified, setAccVerified] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
@@ -363,6 +365,10 @@ export default function CreateOrgAccount() {
               onValueChange={onValueChange}
               onFormSubmit={onFormSubmit}
               formObj={formObj}
+              showPassword={showPassword}
+              showConfirmPassword={showConfirmPassword}
+              setShowConfirmPassword={setShowConfirmPassword}
+              setShowPassword={setShowPassword}
             />
           )}
         </div>

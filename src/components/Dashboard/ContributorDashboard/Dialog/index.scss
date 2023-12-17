@@ -1,0 +1,32 @@
+@import "./../../../../styles/variables";
+
+.ic-org-progress-dialog-container {
+  padding: 15px 0;
+  .ic-org-body-header-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    .ic-org-body-header {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 15px 15px;
+      color: $app-primary-color;
+    }
+    .ic-icon {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      right: 15px;
+      top: 7px;
+    }
+  }
+  .ic-order-details {
+    padding: 10px 0;
+  }
+  .ic-form-fields,
+  .ic-btn {
+    padding: 10px 20px;
+    min-width: 100%;
+  }
+}

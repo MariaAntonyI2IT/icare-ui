@@ -7,6 +7,13 @@ import GoogleIcon from "@mui/icons-material/Google";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import RegistrationLayout from "./../../layouts/RegistrationLayout";
 import { appConfig } from "../../utils/constants";
 import { loginGoogleUser, loginUser } from "../../store/user/action";
@@ -17,6 +24,7 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const [alertObj, setAlertObj] = useState({
     open: false,
     message: "",
@@ -64,7 +72,10 @@ export default function Login() {
         case "email":
           if (!value) {
             form[field].error = "Please enter Email/UID";
-          } else if (value.indexOf('IC-') !== 0 && !value.match(appConfig.mailRegex)) {
+          } else if (
+            value.indexOf("IC-") !== 0 &&
+            !value.match(appConfig.mailRegex)
+          ) {
             form[field].error = "Please enter valid Email/UID";
           }
           break;
@@ -180,17 +191,37 @@ export default function Login() {
             </div>
           </div>
           <div className="ic-form-fields">
-            <TextField
-              error={formObj.password.dirty && !!formObj.password.error}
-              value={formObj.password.value}
-              onChange={(e) => onValueChange(e, "password")}
-              onBlur={() => onBlur("password")}
-              label="Password"
-              type={"password"}
-              variant="outlined"
-              autoComplete="new-password"
-              fullWidth={true}
-            />
+            <FormControl variant="outlined" fullWidth={true}>
+              <InputLabel
+                htmlFor="outlined-adornment-password"
+                error={formObj.password.dirty && !!formObj.password.error}
+              >
+                Password
+              </InputLabel>
+              <OutlinedInput
+                error={formObj.password.dirty && !!formObj.password.error}
+                value={formObj.password.value}
+                onChange={(e) => onValueChange(e, "password")}
+                onBlur={() => onBlur("password")}
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                label="Password"
+                autoComplete="new-password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                      onMouseDown={(e) => e.preventDefault()}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                fullWidth={true}
+              />
+            </FormControl>
             <div className="ic-form-error-msg">
               {formObj.password.dirty && formObj.password.error}
             </div>
@@ -241,7 +272,7 @@ export default function Login() {
             variant="contained"
             onClick={() => googleLogin()}
             disableElevation={true}
-            startIcon={<GoogleIcon />}
+            startIcon={ <GoogleIcon />}
           >
             Continue with Google
           </Button>

@@ -18,6 +18,8 @@ import "./index.scss";
 export default function CreateContributorAccount() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [alertObj, setAlertObj] = useState({
     open: false,
@@ -313,6 +315,10 @@ export default function CreateContributorAccount() {
               onValueChange={onValueChange}
               onFormSubmit={onFormSubmit}
               formObj={formObj}
+              showPassword={showPassword}
+              showConfirmPassword={showConfirmPassword}
+              setShowConfirmPassword={setShowConfirmPassword}
+              setShowPassword={setShowPassword}
             />
           )}
         </div>

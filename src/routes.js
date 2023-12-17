@@ -12,6 +12,12 @@ const router = createBrowserRouter([
   },{
     path: "/create-account",
     element: <CreateAccount />
+  },
+  {
+    path: "/dash",
+    element: <>
+      <Dashboard />
+    </>
   },{
     path: "/dashboard",
     element: <ProtectedRoute>

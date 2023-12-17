@@ -14,7 +14,7 @@ export default function Dashboard() {
         {userProfile === appConfig.profile.organizer ? (
           <ContributorDashboard />
         ) : (
-          <OrganizationDashboard />
+          <ContributorDashboard />
         )}
       </div>
     </div>

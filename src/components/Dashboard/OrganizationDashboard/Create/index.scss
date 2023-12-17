@@ -1,6 +1,12 @@
 @import "./../../../../styles/variables";
 
 .ic-org-create-container {
+  @media only screen and (min-width: 650px) {
+    width: 550px;
+  }
+  @media only screen and (max-width: 650px) {
+    min-width: 100%;
+  }
   .ic-org-body-header {
     font-size: 20px;
     font-weight: 600;
@@ -8,5 +14,35 @@
     color: $app-primary-color;
     display: flex;
     justify-content: center;
+  }
+  .ic-form-fields,
+  .ic-btn {
+    padding: 10px 20px;
+    min-width: 100%;
+
+    &.ic-form-chips {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 20px;
+    }
+
+    .ic-form-items {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0;
+    }
+
+    .ic-item {
+      width: 100%;
+      padding-right: 20px;
+
+      .ic-auto-input {
+        -webkit-user-select: text;
+        -khtml-user-select: text;
+        -moz-user-select: text;
+        -o-user-select: text;
+        user-select: text;
+      }
+    }
   }
 }
