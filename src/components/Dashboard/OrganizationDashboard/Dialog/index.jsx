@@ -12,30 +12,33 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Checkbox from "@mui/material/Checkbox";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Paper from "@mui/material/Paper";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Acknowledge from "./Acknowledge";
+import { useTheme } from "@mui/material/styles";
 import "./index.scss";
 
 export default function DialogModel(props) {
-  const { onClose, data, open, isReadOnly } = props;
+  const { onClose, data, open, type } = props;
   const [requestData, setRequestData] = useState({ ...data });
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const [AckDialogOpen, setAckDialogOpen] = useState(false);
+  const [ackProduct, setAckProduct] = useState();
 
-  const onChange = (e, index) => {
-    const isChecked = e.currentTarget.checked;
-    const reqData = { ...requestData };
-    if (reqData.products[index].oldValue === undefined) {
-      reqData.products[index].oldValue = reqData.products[index].isAcknowledged;
-    }
-    reqData.products[index].isAcknowledged = isChecked;
-    reqData.products[index].canChange = true;
-
-    setRequestData(reqData);
+  const onAcknowledgeClick = (product) => {
+    setAckProduct(product);
+    setAckDialogOpen(true);
   };
 
-  const onFormSubmit = () => {
-    console.log(requestData);
+  const AckDialogClose = () => {
+    setAckDialogOpen(false);
+  };
+
+  const onFormSubmit = (product) => {
+    setAckDialogOpen(false);
     onClose();
   };
 
@@ -62,24 +65,28 @@ export default function DialogModel(props) {
     },
   }));
 
-  const Row = ({ product, index, onChange }) => {
+  const Row = ({ product }) => {
     const [tableOpen, setTableOpen] = useState(false);
     return (
       <>
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            {product.name} ({product.qty})
+            {product.name} ({product.qty} {product.unit})
           </StyledTableCell>
           <StyledTableCell component="th" scope="row">
-            <Checkbox
-              onChange={(e) => onChange(e, index)}
-              checked={!!product.isAcknowledged}
-              disabled={
-                !product.orderId ||
-                (product.isAcknowledged && !product.canChange)
-              }
-            />
+            {product.orderId || ""}
           </StyledTableCell>
+          {type === "progress" && (
+            <StyledTableCell component="th" scope="row">
+              <Button
+                variant="contained"
+                onClick={() => onAcknowledgeClick(product)}
+                disabled={!!product.isAcknowledged || !product.orderId}
+              >
+                {!!product.isAcknowledged ? "Acknowledged" : "Acknowledge"}
+              </Button>
+            </StyledTableCell>
+          )}
           <StyledTableCell>
             <IconButton
               disabled={!product.orderId}
@@ -156,7 +163,7 @@ export default function DialogModel(props) {
                       variant="outlined"
                       autoComplete="new-password"
                       disabled={true}
-                      className={'ic-readOnly'}
+                      className={"ic-readOnly"}
                       fullWidth={true}
                     />
                   </div>
@@ -171,74 +178,73 @@ export default function DialogModel(props) {
 
   return (
     requestData.name && (
-      <Dialog onClose={onClose} open={open} fullWidth={true}>
-        <div className="ic-org-progress-dialog-container">
-          <div className="ic-org-body-header-container">
-            <div className="ic-org-body-header">Request detail</div>
-            <IconButton className="ic-icon" onClick={onClose}>
-              <Close />
-            </IconButton>
-          </div>
-          <div className="ic-form-fields">
-            <TextField
-              value={requestData.name}
-              label="Request Name"
-              variant="outlined"
-              autoComplete="new-password"
-              disabled={true}
-              className={"ic-readOnly"}
-              fullWidth={true}
-            />
-          </div>
-          <div className="ic-form-fields">
-            <TextField
-              value={requestData.description}
-              label="Description"
-              variant="outlined"
-              autoComplete="new-password"
-              disabled={true}
-              className={"ic-readOnly"}
-              multiline={true}
-              fullWidth={true}
-            />
-          </div>
-          <div className="ic-form-fields">
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Product</StyledTableCell>
-                    <StyledTableCell>Order received</StyledTableCell>
-                    <StyledTableCell>Order</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {requestData.products.map((product, index) => {
-                    return (
-                      <Row
-                        product={product}
-                        index={index}
-                        onChange={onChange}
-                      />
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
-          {!isReadOnly && (
-            <div className="ic-btn">
-              <Button
-                variant="contained"
-                fullWidth={true}
-                onClick={onFormSubmit}
-              >
-                Update
-              </Button>
+      <>
+        <Acknowledge
+          open={AckDialogOpen}
+          onClose={AckDialogClose}
+          product={ackProduct}
+          onConfirmation={onFormSubmit}
+        />
+        <Dialog
+          onClose={onClose}
+          open={open}
+          fullWidth={true}
+          fullScreen={isMatch}
+        >
+          <div className="ic-org-progress-dialog-container">
+            <div className="ic-org-body-header-container">
+              <div className="ic-org-body-header">Request detail</div>
+              <IconButton className="ic-icon" onClick={onClose}>
+                <Close />
+              </IconButton>
             </div>
-          )}
-        </div>
-      </Dialog>
+            <div className="ic-form-fields">
+              <TextField
+                value={requestData.name}
+                label="Request Name"
+                variant="outlined"
+                autoComplete="new-password"
+                disabled={true}
+                className={"ic-readOnly"}
+                fullWidth={true}
+              />
+            </div>
+            <div className="ic-form-fields">
+              <TextField
+                value={requestData.description}
+                label="Description"
+                variant="outlined"
+                autoComplete="new-password"
+                disabled={true}
+                className={"ic-readOnly"}
+                multiline={true}
+                fullWidth={true}
+              />
+            </div>
+            <div className="ic-form-fields">
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>Product</StyledTableCell>
+                      <StyledTableCell>Order ID</StyledTableCell>
+                      {type === "progress" && (
+                        <StyledTableCell>Acknowledgement</StyledTableCell>
+                      )}
+                      <StyledTableCell>Order</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {requestData.products.map((product, index) => {
+                      return <Row product={product} key={index} />;
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+          </div>
+        </Dialog>
+      </>
     )
   );
 }

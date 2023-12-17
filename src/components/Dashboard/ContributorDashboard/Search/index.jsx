@@ -9,6 +9,8 @@ import VolunteerActivism from "@mui/icons-material/VolunteerActivism";
 import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
 import { fetchContributorSearchRequest } from "../../../../store/organization/action";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { chips } from "../../../../utils/icare";
 import "./index.scss";
 
 export default function SearchComponent({ onDataChange }) {
@@ -79,18 +81,31 @@ export default function SearchComponent({ onDataChange }) {
       </div>
       <div className="ic-card-container">
         {!requestData ? null : requestData.length ? (
-          requestData.map((data) => {
+          requestData.map((data, index) => {
             return (
-              <div className="ic-card" onClick={() => onCardClick(data)}>
+              <div
+                className="ic-card"
+                onClick={() => onCardClick(data)}
+                key={index}
+              >
                 <div className="ic-card-content">
                   <IconButton className="ic-icon" disableRipple={true}>
                     <VolunteerActivism />
                   </IconButton>
                   <div className="ic-tag-wrapper">
                     <Chip
-                      label={"urgent"}
+                      className="ic-chip"
+                      label={data.tag}
                       variant={"filled"}
-                      color={"error"}
+                      color={chips[data.tag].color || "info"}
+                      onClick={() => null}
+                    />
+                    <Chip
+                      className="ic-chip"
+                      label={data.organization.city}
+                      variant={"filled"}
+                      color={"info"}
+                      icon={<LocationOnIcon />}
                       onClick={() => null}
                     />
                   </div>
@@ -101,14 +116,17 @@ export default function SearchComponent({ onDataChange }) {
                     <div className="ic-description" title={data.description}>
                       {data.description}
                     </div>
+                    <div className="ic-org">
+                      <div className="ic-org-createdby">Posted by</div>
+                      <div className="ic-org-name">
+                        {data.organization.name}
+                      </div>
+                    </div>
                   </div>
                   <div className="ic-footer-wrapper">
                     <div className="ic-status-wrapper">
-                      <div className="ic-badge">
-                        {data.products.filter((p) => !!p.isAcknowledged).length}
-                        /{data.products.length}
-                      </div>
-                      <div className="ic-badge-content">Completed</div>
+                      <div className="ic-badge">{data.products.length}</div>
+                      <div className="ic-badge-content">Product(s)</div>
                     </div>
                     <div className="ic-date">
                       {new Date(data.createdDate).toDateString()}
@@ -123,7 +141,7 @@ export default function SearchComponent({ onDataChange }) {
         )}
       </div>
       <DialogModel
-        isReadOnly={false}
+        type="search"
         open={opendialog}
         data={selectedRequest}
         onClose={onDialoglose}

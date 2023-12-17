@@ -51,10 +51,6 @@ export default function ContributorDashboard() {
 
   const onDashClick = (type) => {
     const obj = { ...dashObj };
-    const keys = Object.keys(obj);
-    for (const field of keys) {
-      obj[field].badge = "";
-    }
     selectDash(obj, type);
     setDashObj(obj);
     selectedDashboard(type);
@@ -75,6 +71,7 @@ export default function ContributorDashboard() {
             const dashboard = dashObj[key];
             return (
               <div
+                key={key}
                 className={`ic-card ${dashboard.selected ? "ic-selected" : ""}`}
                 onClick={() => onDashClick(key)}
               >
@@ -105,9 +102,9 @@ export default function ContributorDashboard() {
           <div className="ic-org-feed-container">
             <div className="ic-org-body-header">Did you know?</div>
             <div className="ic-org-feed-content">
-              {contributorFacts.map((fact) => {
+              {contributorFacts.map((fact, index) => {
                 return (
-                  <div className="ic-card">
+                  <div className="ic-card" key={index}>
                     <div className="ic-card-content">
                       <IconButton className="ic-card-icon" size="large">
                         <InfoIcon />

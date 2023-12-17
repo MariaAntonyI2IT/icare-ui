@@ -10,8 +10,9 @@ import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
 import { fetchOrganizationCurrentRequest } from "../../../../store/organization/action";
 import "./index.scss";
+import { chips } from "../../../../utils/icare";
 
-export default function Progress({onDataChange}) {
+export default function Progress({ onDataChange }) {
   const [opendialog, setOpendialog] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const dispatch = useDispatch();
@@ -79,18 +80,22 @@ export default function Progress({onDataChange}) {
       </div>
       <div className="ic-card-container">
         {!requestData ? null : requestData.length ? (
-          requestData.map((data) => {
+          requestData.map((data, index) => {
             return (
-              <div className="ic-card" onClick={() => onCardClick(data)}>
+              <div
+                className="ic-card"
+                onClick={() => onCardClick(data)}
+                key={index}
+              >
                 <div className="ic-card-content">
                   <IconButton className="ic-icon" disableRipple={true}>
                     <VolunteerActivism />
                   </IconButton>
                   <div className="ic-tag-wrapper">
                     <Chip
-                      label={"urgent"}
+                      label={data.tag}
                       variant={"filled"}
-                      color={"error"}
+                      color={chips[data.tag].color || "info"}
                       onClick={() => null}
                     />
                   </div>
@@ -110,7 +115,9 @@ export default function Progress({onDataChange}) {
                       </div>
                       <div className="ic-badge-content">Completed</div>
                     </div>
-                    <div className="ic-date">{new Date(data.createdDate).toDateString()}</div>
+                    <div className="ic-date">
+                      {new Date(data.createdDate).toDateString()}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -121,7 +128,7 @@ export default function Progress({onDataChange}) {
         )}
       </div>
       <DialogModel
-        isReadOnly={false}
+        type={"progress"}
         open={opendialog}
         data={selectedRequest}
         onClose={onDialoglose}

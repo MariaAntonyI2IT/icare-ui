@@ -30,7 +30,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
-            className={'ic-readOnly'}
+            className={"ic-readOnly"}
             fullWidth={true}
           />
         </div>
@@ -41,7 +41,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
-            className={'ic-readOnly'}
+            className={"ic-readOnly"}
             fullWidth={true}
           />
         </div>
@@ -52,7 +52,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
-            className={'ic-readOnly'}
+            className={"ic-readOnly"}
             fullWidth={true}
           />
         </div>
@@ -63,29 +63,7 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
-            className={'ic-readOnly'}
-            fullWidth={true}
-          />
-        </div>
-        <div className="ic-form-fields">
-          <TextField
-            value={organizerProfile.state}
-            label="State"
-            variant="outlined"
-            autoComplete="new-password"
-            disabled={true}
-            className={'ic-readOnly'}
-            fullWidth={true}
-          />
-        </div>
-        <div className="ic-form-fields">
-          <TextField
-            value={organizerProfile.city}
-            label="City"
-            variant="outlined"
-            autoComplete="new-password"
-            disabled={true}
-            className={'ic-readOnly'}
+            className={"ic-readOnly"}
             fullWidth={true}
           />
         </div>
@@ -97,9 +75,31 @@ export default function OrganizerProfile() {
             variant="outlined"
             autoComplete="new-password"
             disabled={true}
-            className={'ic-readOnly'}
+            className={"ic-readOnly"}
             fullWidth={true}
           />
+          <div className="ic-form-fields">
+            <TextField
+              value={organizerProfile.city}
+              label="City"
+              variant="outlined"
+              autoComplete="new-password"
+              disabled={true}
+              className={"ic-readOnly"}
+              fullWidth={true}
+            />
+          </div>
+          <div className="ic-form-fields">
+            <TextField
+              value={organizerProfile.state}
+              label="State"
+              variant="outlined"
+              autoComplete="new-password"
+              disabled={true}
+              className={"ic-readOnly"}
+              fullWidth={true}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export default function Dashboard() {
       <Header />
       <div className="ic-body-container">
         {userProfile === appConfig.profile.organizer ? (
-          <ContributorDashboard />
+          <OrganizationDashboard />
         ) : (
           <ContributorDashboard />
         )}

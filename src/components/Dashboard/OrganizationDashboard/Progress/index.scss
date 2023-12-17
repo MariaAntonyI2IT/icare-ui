@@ -62,17 +62,18 @@
         .ic-content-wrapper {
           .ic-name {
             font-size: 18px;
-            font-weight: 500;
+            font-weight: 600;
             padding: 0 10px 0 15px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: $app-primary-color;
           }
           .ic-description {
             font-size: 14px;
             font-weight: 300;
             font-style: italic;
-            padding: 10px 10px 15px 15px;
+            padding: 5px 10px 15px 15px;
 
             @media only screen and (min-width: 650px) {
               white-space: nowrap;
@@ -115,8 +116,9 @@
           }
 
           .ic-date {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 400;
+            font-style: italic;
           }
         }
       }

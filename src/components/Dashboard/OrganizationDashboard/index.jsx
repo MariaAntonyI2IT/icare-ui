@@ -47,13 +47,9 @@ export default function OrganizationDashboard() {
     dash[type].badge = data.length.toString();
     setDashObj(dash);
   };
-  
+
   const onDashClick = (type) => {
     const obj = { ...dashObj };
-    const keys = Object.keys(obj);
-    for (const field of keys) {
-      obj[field].badge = "";
-    }
     selectDash(obj, type);
     setDashObj(obj);
     selectedDashboard(type);
@@ -76,6 +72,7 @@ export default function OrganizationDashboard() {
               <div
                 className={`ic-card ${dashboard.selected ? "ic-selected" : ""}`}
                 onClick={() => onDashClick(key)}
+                key={key}
               >
                 <div className="ic-card-content">
                   <Tooltip title={dashboard.name}>
@@ -104,9 +101,9 @@ export default function OrganizationDashboard() {
           <div className="ic-org-feed-container">
             <div className="ic-org-body-header">Did you know?</div>
             <div className="ic-org-feed-content">
-              {organizationFacts.map((fact) => {
+              {organizationFacts.map((fact, index) => {
                 return (
-                  <div className="ic-card">
+                  <div className="ic-card" key={index}>
                     <div className="ic-card-content">
                       <IconButton className="ic-card-icon" size="large">
                         <InfoIcon />

@@ -21,12 +21,25 @@
       top: 7px;
     }
   }
+  a {
+    text-decoration: none;
+    color: #000;
+  }
   .ic-order-details {
     padding: 10px 0;
+  }
+  .ic-org-details {
+    color: $app-primary-color;
+    font-weight: 500;
   }
   .ic-form-fields,
   .ic-btn {
     padding: 10px 20px;
     min-width: 100%;
+  }
+}
+.ic-order-dialog {
+  .ic-form-fields {
+    padding: 20px 10px;
   }
 }

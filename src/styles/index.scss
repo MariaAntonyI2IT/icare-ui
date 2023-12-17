@@ -1,12 +1,28 @@
-* { 
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body, #root { 
-  font-family: 'Roboto', sans-serif;
+body,
+#root {
+  font-family: "Roboto", sans-serif;
   font-weight: normal;
   min-height: 100vh;
   position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bec4c4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

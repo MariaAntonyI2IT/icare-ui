@@ -42,7 +42,7 @@ function* fetchContributorSearchRequest(action) {
   try {
     yield put(enableLoader());
     yield call(mockApi,300);
-    const data = mockData.org.currentRequest;
+    const data = mockData.cont.searchRequest;
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {
@@ -56,7 +56,7 @@ function* fetchContributorCurrentRequest(action) {
   try {
     yield put(enableLoader());
     yield call(mockApi,300);
-    const data = mockData.org.currentRequest;
+    const data = mockData.cont.currentRequest;
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {
@@ -70,7 +70,7 @@ function* fetchContributorCompletedRequest(action) {
   try {
     yield put(enableLoader());
     yield call(mockApi,300);
-    const data = mockData.org.currentRequest;
+    const data = mockData.cont.completedRequest;
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {

@@ -12,7 +12,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./index.scss";
-import { products, categories } from "../../../../utils/icare";
+import { products, categories, chips } from "../../../../utils/icare";
 
 export default function Create() {
   const [formObj, setFormObj] = useState({
@@ -21,10 +21,14 @@ export default function Create() {
     tag: {
       value: "Non-urgent",
       options: [
-        { label: "Non-urgent", isSelected: true, color: "info" },
-        { label: "Normal", isSelected: false, color: "secondary" },
-        { label: "Urgent", isSelected: false, color: "warning" },
-        { label: "Emergency", isSelected: false, color: "error" },
+        {
+          label: "Non-urgent",
+          isSelected: true,
+          color: chips["Non-urgent"].color,
+        },
+        { label: "Normal", isSelected: false, color: chips.Normal.color },
+        { label: "Urgent", isSelected: false, color: chips.Urgent.color },
+        { label: "Emergency", isSelected: false, color: chips.Emergency.color },
       ],
       error: "",
       dirty: false,
@@ -246,6 +250,7 @@ export default function Create() {
         {formObj.tag.options.map((option) => {
           return (
             <Chip
+              key={option.label}
               label={option.label}
               variant={option.isSelected ? "filled" : "outlined"}
               color={option.color}
@@ -267,7 +272,7 @@ export default function Create() {
       <div className="ic-form-fields">
         {itemList.map((item, index) => {
           return (
-            <div className="ic-form-items">
+            <div className="ic-form-items" key={index}>
               <div className="ic-item">
                 <FormControl fullWidth={true}>
                   <InputLabel htmlFor="grouped-select">Product</InputLabel>
@@ -279,13 +284,13 @@ export default function Create() {
                     label="Grouping"
                     onChange={(e, item) => onItemDdnChange(e, item, index)}
                   >
-                    {getDDnOptions().map((option) => {
+                    {getDDnOptions().map((option, index) => {
                       return option.type == "header" ? (
-                        <ListSubheader sx={{ color: "#30a0b1" }}>
+                        <ListSubheader sx={{ color: "#30a0b1" }} key={index}>
                           {option.value}
                         </ListSubheader>
                       ) : (
-                        <MenuItem value={option.value}>
+                        <MenuItem value={option.value} key={index}>
                           {option.value.name}
                         </MenuItem>
                       );
@@ -294,7 +299,7 @@ export default function Create() {
                 </FormControl>
               </div>
               <TextField
-                error={item.qty.error}
+                error={!!item.qty.error}
                 value={item.qty.value}
                 onChange={(e) => onItemValueChange(e, "qty", index)}
                 label={item.qty.label}
