@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Chip from "@mui/material/Chip";
@@ -13,6 +13,9 @@ import "./index.scss";
 import { chips } from "../../../../utils/icare";
 
 export default function Progress({ onDataChange }) {
+  const organizationProfile = useSelector(
+    (state) => state.user.organizationProfile
+  );
   const [opendialog, setOpendialog] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const dispatch = useDispatch();

@@ -79,6 +79,7 @@ export default function DialogModel(props) {
           {type === "progress" && (
             <StyledTableCell component="th" scope="row">
               <Button
+                className="ic-ack-btn"
                 variant="contained"
                 onClick={() => onAcknowledgeClick(product)}
                 disabled={!!product.isAcknowledged || !product.orderId}

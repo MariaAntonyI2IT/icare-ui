@@ -9,6 +9,7 @@ export const userSlice = createSlice({
     isLoggedIn: false,
     initialized: true,
     contributorProfile: {
+      id: '',
       email: '',
       firstName: '',
       lastName: '',
@@ -16,6 +17,7 @@ export const userSlice = createSlice({
       avatar: ''
     },
     organizationProfile: {
+      id: '',
       uid: '',
       ngoId: '',
       registrationNumber: '',
@@ -51,11 +53,13 @@ export const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = '';
       state.userProfile = '';
+      state.contributorProfile.id = '';
       state.contributorProfile.avatar = '';
       state.contributorProfile.email = '';
       state.contributorProfile.firstName = '';
       state.contributorProfile.lastName = '';
       state.contributorProfile.phoneNumber = '';
+      state.organizationProfile.id = '';
       state.organizationProfile.address = '';
       state.organizationProfile.avatar = '';
       state.organizationProfile.city = '';

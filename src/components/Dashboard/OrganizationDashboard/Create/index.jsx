@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,6 +15,9 @@ import "./index.scss";
 import { products, categories, chips } from "../../../../utils/icare";
 
 export default function Create() {
+  const organizationProfile = useSelector(
+    (state) => state.user.organizationProfile
+  );
   const [formObj, setFormObj] = useState({
     name: { value: "", error: "", dirty: false, isMandatory: true },
     description: { value: "", error: "", dirty: false, isMandatory: true },
@@ -54,7 +57,7 @@ export default function Create() {
       const category = categories[key];
       options.push({ type: "header", value: category });
       products
-        .filter((product) => product.category == category)
+        .filter((product) => product.category === category)
         .map((product) => {
           options.push({ type: "content", value: product });
         });
@@ -285,7 +288,7 @@ export default function Create() {
                     onChange={(e, item) => onItemDdnChange(e, item, index)}
                   >
                     {getDDnOptions().map((option, index) => {
-                      return option.type == "header" ? (
+                      return option.type === "header" ? (
                         <ListSubheader sx={{ color: "#30a0b1" }} key={index}>
                           {option.value}
                         </ListSubheader>
@@ -315,7 +318,7 @@ export default function Create() {
                 className="ic-delete-icon"
                 size="large"
                 onClick={() => onDeleteBtnClick(index)}
-                disabled={itemList.length == 1}
+                disabled={itemList.length === 1}
               >
                 <DeleteIcon />
               </IconButton>

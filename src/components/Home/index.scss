@@ -1,0 +1,184 @@
+@import "./../../styles/variables";
+
+.ic-home-container {
+  min-height: 100vh;
+  background-color: #f8f8fd;
+
+  .ic-header-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .ic-home-body-header {
+      font-size: 40px;
+      font-weight: 600;
+      padding: 30px 0 15px 0;
+      color: $app-primary-color;
+      display: flex;
+      justify-content: center;
+    }
+
+    .ic-home-body-description {
+      font-size: 19px;
+      font-weight: 400;
+      padding: 15px 15px 35px 15px;
+      display: flex;
+      color: $app-primary-color;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      @media only screen and (min-width: 850px) {
+        width: 800px;
+      }
+      @media only screen and (max-width: 850px) {
+        min-width: 100%;
+      }
+    }
+  }
+
+  .ic-home-search-container {
+    width: 100%;
+
+    .ic-search {
+      display: flex;
+      justify-content: center;
+      .ic-form-fields {
+        padding: 10px 20px;
+        @media only screen and (min-width: 650px) {
+          width: 550px;
+        }
+        @media only screen and (max-width: 650px) {
+          min-width: 100%;
+        }
+      }
+    }
+
+    .ic-card-container {
+      width: 100%;
+      padding: 10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+  
+      .ic-card {
+        @media only screen and (min-width: 650px) {
+          margin: 20px 50px;
+        }
+        @media only screen and (max-width: 650px) {
+          margin: 20px;
+        }
+        width: 500px;
+
+        .ic-card-content {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          .ic-tag-wrapper {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 0;
+            margin: 5px 10px;
+
+            .ic-chip {
+              margin: 10px 0 0 0;
+            }
+          }
+
+          .ic-icon {
+            padding: 20px 0px;
+            svg {
+              color: $app-primary-color;
+              font-size: 100px;
+            }
+          }
+
+          .ic-content-wrapper {
+            .ic-name {
+              font-size: 18px;
+              font-weight: 600;
+              padding: 0 10px 0 15px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: $app-primary-color;
+            }
+            .ic-description {
+              font-size: 14px;
+              font-weight: 300;
+              font-style: italic;
+              padding: 5px 10px 15px 15px;
+
+              @media only screen and (min-width: 650px) {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
+
+            .ic-org {
+              padding: 0 10px 15px 15px;
+              .ic-org-createdby {
+                color: $app-primary-color;
+                font-size: 15px;
+                font-weight: 600;
+              }
+
+              .ic-org-name {
+                padding-top: 5px;
+                font-size: 14px;
+                font-weight: 400;
+              }
+            }
+          }
+
+          .ic-footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 15px 15px 15px;
+
+            .ic-status-wrapper {
+              display: flex;
+              align-items: center;
+
+              .ic-badge {
+                display: flex;
+                width: 25px;
+                height: 25px;
+                justify-content: center;
+                align-items: center;
+                font-size: 10px;
+                font-weight: bolder;
+                color: #fff;
+                border-radius: 50%;
+                background-color: $app-primary-color;
+                box-shadow: 0em 0em 1px rgba(255, 255, 255, 0.25),
+                  inset 0px 0px 5px rgba(0, 0, 0, 0.25);
+              }
+
+              .ic-badge-content {
+                font-size: 14px;
+                font-weight: 400;
+                padding-left: 10px;
+              }
+            }
+
+            .ic-date {
+              font-size: 13px;
+              font-weight: 400;
+              font-style: italic;
+            }
+          }
+        }
+      }
+    }
+
+    .ic-no-data {
+      font-size: 18px;
+      font-weight: 500;
+      padding: 20px 0;
+    }
+  }
+}

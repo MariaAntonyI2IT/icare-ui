@@ -80,7 +80,7 @@ export default function DialogModel(props) {
             {product.qty}
           </StyledTableCell>
           <StyledTableCell component="th" scope="row">
-            {type == "search" ? (
+            {type === "search" ? (
               <Button
                 variant="contained"
                 onClick={() => onAcknowledgeClick(product)}
@@ -240,7 +240,7 @@ export default function DialogModel(props) {
                       <StyledTableCell>Product</StyledTableCell>
                       <StyledTableCell>Quantity</StyledTableCell>
                       <StyledTableCell>
-                        {type == "search" ? "Order" : "Order Id"}
+                        {type === "search" ? "Order" : "Order Id"}
                       </StyledTableCell>
                     </TableRow>
                   </TableHead>

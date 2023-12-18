@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import logo from "./../../assets/logo.png";
+import Button from "@mui/material/Button";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { clearProfile } from "./../../store/user/action";
 import Logout from "@mui/icons-material/Logout";
@@ -8,7 +9,7 @@ import { clearSession } from "./../../utils/session";
 import { useNavigate } from "react-router-dom";
 import "./index.scss";
 
-export default function Header() {
+export default function Header({ isHome = false }) {
   const avatar = useSelector((state) => state.user.contributorProfile.avatar);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,11 +21,15 @@ export default function Header() {
   };
 
   const onHomeBtnClick = () => {
-    navigate("/");
+    navigate("/dashboard");
   };
 
   const onProfileBtnClick = () => {
     navigate("/profile");
+  };
+
+  const onLoginClick = () => {
+    navigate("/login");
   };
 
   return (
@@ -35,30 +40,38 @@ export default function Header() {
         </div>
         <div className="ic-header-name"> ICare </div>
       </div>
-      <div className="ic-profile">
-        {avatar ? (
-          <img
-            src={avatar}
-            alt={"Avatar"}
-            onClick={() => onProfileBtnClick()}
-          />
-        ) : (
+      {isHome ? (
+        <div className="ic-profile">
+          <Button variant="contained" onClick={() => onLoginClick()}>
+            Sign in
+          </Button>
+        </div>
+      ) : (
+        <div className="ic-profile">
+          {avatar ? (
+            <img
+              src={avatar}
+              alt={"Avatar"}
+              onClick={() => onProfileBtnClick()}
+            />
+          ) : (
+            <IconButton
+              className="ic-bck-icon"
+              size="large"
+              onClick={() => onProfileBtnClick()}
+            >
+              <AccountCircle />
+            </IconButton>
+          )}
           <IconButton
             className="ic-bck-icon"
             size="large"
-            onClick={() => onProfileBtnClick()}
+            onClick={() => onLogOutClick()}
           >
-            <AccountCircle />
+            <Logout />
           </IconButton>
-        )}
-        <IconButton
-          className="ic-bck-icon"
-          size="large"
-          onClick={() => onLogOutClick()}
-        >
-          <Logout />
-        </IconButton>
-      </div>
+        </div>
+      )}
     </div>
   );
 }

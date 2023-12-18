@@ -8,14 +8,14 @@ import {
   REGISTER_CONTRIBUTOR_REQUESTED,REGISTER_ORGANIZATION_REQUESTED,SEND_OTP_REQUESTED,VERIFY_ORGANIZATION_REQUESTED,VERIFY_OTP_REQUESTED
 } from './actionTypes';
 import {updateContributorProfile,updateOrganizationProfile,updateToken,updateLoggedIn,updateInitialized,clearUserData} from './reducer';
-import {enableLoader,disableLoader} from './../app/reducer';
+import {enableLoginLoader, disableLoginLoader} from './../login/reducer';
 import {appConfig} from '../../utils/constants';
 import {setSession} from '../../utils/session';
 
 
 function* loginUser(action) {
   try {
-    yield put(enableLoader());
+    yield put(enableLoginLoader());
     yield put(updateInitialized(false));
     yield put(updateLoggedIn(false));
     const {email,password} = action.payload;
@@ -32,21 +32,21 @@ function* loginUser(action) {
     } else {
       yield put(updateOrganizationProfile(data.organization));
     }
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     yield put(updateLoggedIn(true));
     yield put(updateInitialized(true));
     action?.successCb();
   } catch(e) {
     yield put(updateLoggedIn(false));
     yield put(updateInitialized(true));
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
-function* fetchProfileDetails(action) {
+function* fetchProfileDetails() {
   try {
-    yield put(enableLoader());
+    yield put(enableLoginLoader());
     yield put(updateInitialized(false));
     yield put(updateLoggedIn(false));
     const {data} = yield call(fetchProfile);
@@ -55,19 +55,19 @@ function* fetchProfileDetails(action) {
     } else {
       yield put(updateOrganizationProfile(data.organization));
     }
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     yield put(updateLoggedIn(true));
     yield put(updateInitialized(true));
   } catch(e) {
     yield put(updateInitialized(true))
     yield put(updateLoggedIn(false));
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
   }
 }
 
 function* loginGoogleUser(action) {
   try {
-    yield put(enableLoader());
+    yield put(enableLoginLoader());
     yield put(updateInitialized(false));
     yield put(updateLoggedIn(false));
     const {accessToken} = action.payload;
@@ -82,40 +82,40 @@ function* loginGoogleUser(action) {
     } else {
       yield put(updateOrganizationProfile(data.organization));
     }
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     yield put(updateLoggedIn(true));
     yield put(updateInitialized(true));
     action?.successCb();
   } catch(e) {
     yield put(updateInitialized(true))
     yield put(updateLoggedIn(false));
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* rgisterContributor(action) {
   try {
-    yield put(enableLoader());
+    yield put(enableLoginLoader());
     yield call(mockApi,1500);
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.successCb();
   } catch(e) {
     yield call(mockApi,1500);
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.failureCb(e.message);
   }
 }
 
 function* rgisterOrganization(action) {
   try {
-    yield put(enableLoader());
+    yield put(enableLoginLoader());
     yield call(mockApi,1500);
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.successCb();
   } catch(e) {
     yield call(mockApi,1500);
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.failureCb(e.message);
   }
 }
@@ -140,13 +140,13 @@ function* verifyOrganization(action) {
 
 function* forgotPassword(action) {
   try {
-    yield put(enableLoader());
+    yield put(enableLoginLoader());
     yield call(mockApi,1500);
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.successCb();
   } catch(e) {
     yield call(mockApi,1500);
-    yield put(disableLoader());
+    yield put(disableLoginLoader());
     action?.failureCb(e.message);
   }
 }

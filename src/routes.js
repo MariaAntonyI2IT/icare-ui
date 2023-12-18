@@ -4,8 +4,13 @@ import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
 import CreateAccount from './components/CreateAccount';
 import ProtectedRoute from './protectedRoute';
+import Home from "./components/Home";
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home />
+  },
   {
     path: "/login",
     element: <Login />
@@ -14,11 +19,6 @@ const router = createBrowserRouter([
     element: <CreateAccount />
   },
   {
-    path: "/dash",
-    element: <>
-      <Dashboard />
-    </>
-  },{
     path: "/dashboard",
     element: <ProtectedRoute>
       <Dashboard />
@@ -28,10 +28,6 @@ const router = createBrowserRouter([
     element: <ProtectedRoute>
       <Profile />
     </ProtectedRoute>
-  },
-  {
-    path: '/',
-    element: <Navigate replace to="/dashboard" />
   },
   {
     path: '*',

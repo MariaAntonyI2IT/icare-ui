@@ -27,3 +27,12 @@ export const fetchProfile = () =>
     method: 'post',
     url: '/profile'
   });
+
+  export const createRequest = (data) =>
+  axios({
+    method: 'post',
+    url: '/request/create',
+    data
+  });
+
+  
