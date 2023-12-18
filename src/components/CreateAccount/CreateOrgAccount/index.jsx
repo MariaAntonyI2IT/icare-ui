@@ -82,6 +82,20 @@ export default function CreateOrgAccount() {
       isMandatory: true,
       category: "password",
     },
+    address: {
+      value: "",
+      error: "",
+      dirty: false,
+      isMandatory: false,
+      category: "",
+    },
+    city: {
+      value: "",
+      error: "",
+      dirty: false,
+      isMandatory: false,
+      category: "",
+    },
     password: {
       value: "",
       error: "",
@@ -101,7 +115,7 @@ export default function CreateOrgAccount() {
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     checkError(field, form);
     setFormObj(form);
   };
@@ -137,7 +151,7 @@ export default function CreateOrgAccount() {
         case "otp":
           if (!value) {
             form[field].error = "Please enter OTP";
-          } else if (value.length !== 6) {
+          } else if (value.length !== 4) {
             form[field].error = "OTP should be 6 digit";
           }
           break;
@@ -181,13 +195,10 @@ export default function CreateOrgAccount() {
 
   const verifyNgoOrganization = () => {
     if (isValidForm("ngo")) {
-      const obj = {
-        ngoId: formObj.ngoId.value,
-      };
       setLoading(true);
       dispatch(
         verifyOrganization(
-          obj,
+          formObj.ngoId.value,
           (data) => {
             const keys = Object.keys(formObj);
             const form = { ...formObj };
@@ -215,7 +226,7 @@ export default function CreateOrgAccount() {
     if (isValidForm("account")) {
       setLoading(true);
       const obj = {
-        email: formObj.email.value,
+        username: formObj.email.value,
       };
       dispatch(
         sendOtp(
@@ -237,6 +248,7 @@ export default function CreateOrgAccount() {
             }
           },
           (errorMsg) => {
+            setLoading(false);
             setTimeout(() => {
               setAlertObj({ open: true, message: errorMsg, isSuccess: false });
             }, 100);
@@ -252,6 +264,7 @@ export default function CreateOrgAccount() {
     if (isValidForm("otp")) {
       setLoading(true);
       const obj = {
+        username: formObj.email.value,
         otp: formObj.otp.value,
       };
       dispatch(
@@ -262,6 +275,7 @@ export default function CreateOrgAccount() {
             setLoading(false);
           },
           (errorMsg) => {
+            setLoading(false);
             setTimeout(() => {
               setAlertObj({ open: true, message: errorMsg, isSuccess: false });
             }, 100);
@@ -277,7 +291,15 @@ export default function CreateOrgAccount() {
   const onFormSubmit = () => {
     if (isValidForm()) {
       const obj = {
+        address: formObj.address.value,
+        city: formObj.city.value,
+        registrationNumber: formObj.registrationNumber.value,
+        name: formObj.name.value,
+        state: formObj.state.value,
+        username: formObj.uid.value,
         email: formObj.email.value,
+        ngoId: formObj.ngoId.value,
+        password: formObj.password.value,
       };
       dispatch(
         registerOrganization(

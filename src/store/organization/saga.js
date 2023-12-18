@@ -1,25 +1,42 @@
 import {call,takeEvery,put} from 'redux-saga/effects'
-import {mockData} from '../../utils/mock';
 import {disableLoader,enableLoader} from '../app/reducer';
+import {
+  createRequest,fetchRequestList,donateProductService,
+  fetchContributorCurrentListService,fetchContributorCompletedService,
+  fetchOrganizationCurrentListService,fetchOrganizationCompletedService,acknowledgeProductService
+} from '../../services/user';
 import {
   FETCH_CONTRIBUTOR_COMPLETED_REQUEST,
   FETCH_CONTRIBUTOR_CURRENT_REQUEST,
   FETCH_CONTRIBUTOR_SEARCH_REQUEST,
   FETCH_ORGANIZATION_COMPLETED_REQUEST,
-  FETCH_ORGANIZATION_CURRENT_REQUEST
+  ORGANIZATION_CREATE_REQUEST,
+  FETCH_ORGANIZATION_CURRENT_REQUEST,
+  DONATE_CONTRIBUTOR_REQUEST,
+  ACKNOWLEDGE_CONTRIBUTOR_REQUEST
 } from './actionTypes';
+
+function* createOrganizationRequest(action) {
+  try {
+    yield put(enableLoader());
+    yield call(createRequest,action.payload);
+    action?.successCb();
+    yield put(disableLoader());
+  } catch(e) {
+    yield put(disableLoader());
+    action?.failureCb(e.response?.data?.message || e.message);
+  }
+}
 
 function* fetchOrganizationCurrentRequest(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,300);
-    const data = mockData.org.currentRequest;
+    const {data} = yield call(fetchOrganizationCurrentListService,action.payload);
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {
-    yield call(mockApi,300);
     yield put(disableLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
@@ -27,56 +44,72 @@ function* fetchOrganizationCurrentRequest(action) {
 function* fetchOrganizationCompletedRequest(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,300);
-    const data = mockData.org.completedRequest;
+    const {data} = yield call(fetchOrganizationCompletedService,action.payload);
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {
-    yield call(mockApi,300);
     yield put(disableLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* fetchContributorSearchRequest(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,300);
-    const data = mockData.cont.searchRequest;
+    const {data} = yield call(fetchRequestList,action.payload);
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {
-    yield call(mockApi,300);
     yield put(disableLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* fetchContributorCurrentRequest(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,300);
-    const data = mockData.cont.currentRequest;
+    const {data} = yield call(fetchContributorCurrentListService,action.payload);
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {
-    yield call(mockApi,300);
     yield put(disableLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* fetchContributorCompletedRequest(action) {
   try {
     yield put(enableLoader());
-    yield call(mockApi,300);
-    const data = mockData.cont.completedRequest;
+    const {data} = yield call(fetchContributorCompletedService,action.payload);
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {
-    yield call(mockApi,300);
     yield put(disableLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
+  }
+}
+
+function* donateProduct(action) {
+  try {
+    yield put(enableLoader());
+    yield call(donateProductService,action.payload);
+    action?.successCb();
+    yield put(disableLoader());
+  } catch(e) {
+    yield put(disableLoader());
+    action?.failureCb(e.response?.data?.message || e.message);
+  }
+}
+
+function* acknowledgeProduct(action) {
+  try {
+    yield put(enableLoader());
+    yield call(acknowledgeProductService,action.payload);
+    action?.successCb();
+    yield put(disableLoader());
+  } catch(e) {
+    yield put(disableLoader());
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
@@ -90,11 +123,14 @@ const mockApi = (time) => {
 };
 
 function* organizationSaga() {
+  yield takeEvery(ORGANIZATION_CREATE_REQUEST,createOrganizationRequest);
   yield takeEvery(FETCH_ORGANIZATION_CURRENT_REQUEST,fetchOrganizationCurrentRequest);
   yield takeEvery(FETCH_ORGANIZATION_COMPLETED_REQUEST,fetchOrganizationCompletedRequest);
   yield takeEvery(FETCH_CONTRIBUTOR_SEARCH_REQUEST,fetchContributorSearchRequest);
   yield takeEvery(FETCH_CONTRIBUTOR_CURRENT_REQUEST,fetchContributorCurrentRequest);
   yield takeEvery(FETCH_CONTRIBUTOR_COMPLETED_REQUEST,fetchContributorCompletedRequest);
+  yield takeEvery(DONATE_CONTRIBUTOR_REQUEST,donateProduct);
+  yield takeEvery(ACKNOWLEDGE_CONTRIBUTOR_REQUEST,acknowledgeProduct);
 }
 
 export default organizationSaga;

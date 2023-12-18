@@ -21,7 +21,7 @@ export default function OrganizationDashboard() {
       component: <Create />,
     },
     progress: {
-      name: "Current Request",
+      name: "In Progress ...",
       badge: "",
       selected: false,
       icon: <PendingIcon />,
@@ -30,7 +30,7 @@ export default function OrganizationDashboard() {
       ),
     },
     completed: {
-      name: "Completed Request",
+      name: "Completed",
       badge: "",
       selected: false,
       icon: <CheckCircleIcon />,

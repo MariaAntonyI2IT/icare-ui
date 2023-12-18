@@ -84,7 +84,7 @@ export default function CreateContributorAccount() {
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     checkError(field, form);
     setFormObj(form);
   };
@@ -116,7 +116,7 @@ export default function CreateContributorAccount() {
         case "otp":
           if (!value) {
             form[field].error = "Please enter OTP";
-          } else if (value.length !== 6) {
+          } else if (value.length !== 4) {
             form[field].error = "OTP should be 6 digit";
           }
           break;
@@ -179,7 +179,7 @@ export default function CreateContributorAccount() {
     if (isValidForm("account")) {
       setLoading(true);
       const obj = {
-        email: formObj.email.value,
+        username: formObj.email.value,
       };
       dispatch(
         sendOtp(
@@ -187,7 +187,6 @@ export default function CreateContributorAccount() {
           () => {
             if (resend) {
               setLoading(false);
-
               setTimeout(() => {
                 setAlertObj({
                   open: true,
@@ -201,6 +200,7 @@ export default function CreateContributorAccount() {
             }
           },
           (errorMsg) => {
+            setLoading(false);
             setTimeout(() => {
               setAlertObj({ open: true, message: errorMsg, isSuccess: false });
             }, 100);
@@ -216,6 +216,7 @@ export default function CreateContributorAccount() {
     if (isValidForm("otp")) {
       setLoading(true);
       const obj = {
+        username: formObj.email.value,
         otp: formObj.otp.value,
       };
       dispatch(
@@ -226,6 +227,7 @@ export default function CreateContributorAccount() {
             setLoading(false);
           },
           (errorMsg) => {
+            setLoading(false);
             setTimeout(() => {
               setAlertObj({ open: true, message: errorMsg, isSuccess: false });
             }, 100);
@@ -245,6 +247,8 @@ export default function CreateContributorAccount() {
         firstName: formObj.firstName.value,
         lastName: formObj.lastName.value,
         phoneNumber: formObj.phoneNumber.value,
+        password: formObj.password.value,
+        username: formObj.email.value
       };
       dispatch(
         registerContributor(

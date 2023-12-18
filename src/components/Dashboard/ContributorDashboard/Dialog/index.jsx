@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import Order from "./Order";
 
 export default function DialogModel(props) {
-  const { onClose, data, open, type } = props;
+  const { onClose, data, open, type, onOrderProduct } = props;
   const [requestData, setRequestData] = useState({ ...data });
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -42,6 +42,7 @@ export default function DialogModel(props) {
   const onFormSubmit = (product) => {
     setOrderDialogOpen(false);
     onClose();
+    onOrderProduct(product);
   };
 
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function DialogModel(props) {
             </Link>
           </StyledTableCell>
           <StyledTableCell component="th" scope="row">
-            {product.qty}
+            {product.quantity}
           </StyledTableCell>
           <StyledTableCell component="th" scope="row">
             {type === "search" ? (

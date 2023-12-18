@@ -11,6 +11,7 @@ import { debounce } from "lodash";
 import { fetchContributorCompletedRequest } from "../../../../store/organization/action";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { chips } from "../../../../utils/icare";
+import ShowAlert from "../../../../widgets/Alert";
 import "./index.scss";
 
 export default function Completed({ onDataChange }) {
@@ -20,6 +21,11 @@ export default function Completed({ onDataChange }) {
   const [opendialog, setOpendialog] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const dispatch = useDispatch();
+  const [alertObj, setAlertObj] = useState({
+    open: false,
+    message: "",
+    isSuccess: true,
+  });
   const [formObj, setFormObj] = useState({
     name: { value: "", error: "", dirty: false, isMandatory: true },
   });
@@ -28,11 +34,17 @@ export default function Completed({ onDataChange }) {
 
   const fetchData = () => {
     dispatch(
-      fetchContributorCompletedRequest({}, (data) => {
-        onDataChange(data);
-        setRequestData(data);
-      }),
-      () => {}
+      fetchContributorCompletedRequest(contributorProfile.id,
+        (data) => {
+          onDataChange(data);
+          setRequestData(data);
+        },
+        (errorMsg) => {
+          setTimeout(() => {
+            setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+          }, 100);
+        }
+      )
     );
   };
 
@@ -40,12 +52,16 @@ export default function Completed({ onDataChange }) {
     fetchData();
   }, []);
 
+  const handleAlertClose = () => {
+    setAlertObj({ open: false, message: "", isSuccess: false });
+  };
+
   const debounced = useCallback(debounce(fetchData, 1000), []);
 
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     setFormObj(form);
     debounced();
   };
@@ -62,7 +78,16 @@ export default function Completed({ onDataChange }) {
 
   return (
     <div className="ic-cont-completed-container">
-      <div className="ic-cont-body-header">Completed Request</div>
+      {alertObj.open ? (
+        <ShowAlert
+          alertOpen={true}
+          message={alertObj.message}
+          isScuccess={alertObj.isSuccess}
+          handleAlertClose={() => handleAlertClose()}
+        />
+      ) : null}
+
+      <div className="ic-cont-body-header">Completed</div>
       <div className="ic-search">
         <div className="ic-form-fields">
           <TextField
@@ -105,6 +130,13 @@ export default function Completed({ onDataChange }) {
                     />
                     <Chip
                       className="ic-chip"
+                      label={data.type}
+                      variant={"filled"}
+                      color={"success"}
+                      onClick={() => null}
+                    />
+                    <Chip
+                      className="ic-chip"
                       label={data.organization.city}
                       variant={"filled"}
                       color={"info"}
@@ -132,7 +164,7 @@ export default function Completed({ onDataChange }) {
                       <div className="ic-badge-content">Product(s)</div>
                     </div>
                     <div className="ic-date">
-                      {new Date(data.createdDate).toDateString()}
+                      {new Date(data.raisedDate).toDateString()}
                     </div>
                   </div>
                 </div>

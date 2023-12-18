@@ -24,7 +24,7 @@ export default function ForgotPassword() {
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     checkError(field, form);
     setFormObj(form);
   };

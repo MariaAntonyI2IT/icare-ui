@@ -8,7 +8,11 @@ import DialogModel from "./../Dialog";
 import VolunteerActivism from "@mui/icons-material/VolunteerActivism";
 import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
-import { fetchContributorSearchRequest } from "../../../../store/organization/action";
+import {
+  fetchContributorSearchRequest,
+  donateContributorRequest,
+} from "../../../../store/organization/action";
+import ShowAlert from "../../../../widgets/Alert";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { chips } from "../../../../utils/icare";
 import "./index.scss";
@@ -17,6 +21,11 @@ export default function SearchComponent({ onDataChange }) {
   const contributorProfile = useSelector(
     (state) => state.user.contributorProfile
   );
+  const [alertObj, setAlertObj] = useState({
+    open: false,
+    message: "",
+    isSuccess: true,
+  });
   const [opendialog, setOpendialog] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const dispatch = useDispatch();
@@ -32,12 +41,49 @@ export default function SearchComponent({ onDataChange }) {
 
   const fetchData = () => {
     dispatch(
-      fetchContributorSearchRequest({}, (data) => {
-        onDataChange(data);
-        setRequestData(data);
-      }),
-      () => {}
+      fetchContributorSearchRequest(
+        {},
+        (data) => {
+          onDataChange(data);
+          setRequestData(data);
+        },
+        (errorMsg) => {
+          setTimeout(() => {
+            setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+          }, 100);
+        }
+      )
     );
+  };
+
+  const orderProduct = (product) => {
+    const data = {
+      productId: product.id,
+      contributorId: contributorProfile.id,
+      orderId: product.orderId,
+    };
+    dispatch(
+      donateContributorRequest(
+        data,
+        () => {
+          setAlertObj({
+            open: true,
+            message: "Product Donated Successfully",
+            isSuccess: true,
+          });
+          fetchData();
+        },
+        (errorMsg) => {
+          setTimeout(() => {
+            setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+          }, 100);
+        }
+      )
+    );
+  };
+
+  const handleAlertClose = () => {
+    setAlertObj({ open: false, message: "", isSuccess: false });
   };
 
   const debounced = useCallback(debounce(fetchData, 1000), []);
@@ -45,7 +91,7 @@ export default function SearchComponent({ onDataChange }) {
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     setFormObj(form);
     debounced();
   };
@@ -62,6 +108,15 @@ export default function SearchComponent({ onDataChange }) {
 
   return (
     <div className="ic-cont-search-container">
+      {alertObj.open ? (
+        <ShowAlert
+          alertOpen={true}
+          message={alertObj.message}
+          isScuccess={alertObj.isSuccess}
+          handleAlertClose={() => handleAlertClose()}
+        />
+      ) : null}
+
       <div className="ic-cont-body-header">Search Request</div>
       <div className="ic-search">
         <div className="ic-form-fields">
@@ -105,6 +160,13 @@ export default function SearchComponent({ onDataChange }) {
                     />
                     <Chip
                       className="ic-chip"
+                      label={data.type}
+                      variant={"filled"}
+                      color={"info"}
+                      onClick={() => null}
+                    />
+                    <Chip
+                      className="ic-chip"
                       label={data.organization.city}
                       variant={"filled"}
                       color={"info"}
@@ -132,7 +194,7 @@ export default function SearchComponent({ onDataChange }) {
                       <div className="ic-badge-content">Product(s)</div>
                     </div>
                     <div className="ic-date">
-                      {new Date(data.createdDate).toDateString()}
+                      {new Date(data.raisedDate).toDateString()}
                     </div>
                   </div>
                 </div>
@@ -145,6 +207,7 @@ export default function SearchComponent({ onDataChange }) {
       </div>
       <DialogModel
         type="search"
+        onOrderProduct={orderProduct}
         open={opendialog}
         data={selectedRequest}
         onClose={onDialoglose}

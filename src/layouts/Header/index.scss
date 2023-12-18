@@ -43,6 +43,10 @@
   .ic-profile {
     display: flex;
     align-items: center;
+
+    .ic-signin {
+      margin-right: 15px;
+    }
     svg {
       height: 2rem;
       width: 2rem;

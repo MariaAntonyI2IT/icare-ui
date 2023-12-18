@@ -9,6 +9,7 @@ import VolunteerActivism from "@mui/icons-material/VolunteerActivism";
 import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
 import { fetchOrganizationCompletedRequest } from "../../../../store/organization/action";
+import ShowAlert from "../../../../widgets/Alert";
 import "./index.scss";
 import { chips } from "../../../../utils/icare";
 
@@ -16,6 +17,11 @@ export default function Completed({ onDataChange }) {
   const organizationProfile = useSelector(
     (state) => state.user.organizationProfile
   );
+  const [alertObj, setAlertObj] = useState({
+    open: false,
+    message: "",
+    isSuccess: true,
+  });
   const [opendialog, setOpendialog] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const dispatch = useDispatch();
@@ -27,12 +33,23 @@ export default function Completed({ onDataChange }) {
 
   const fetchData = () => {
     dispatch(
-      fetchOrganizationCompletedRequest({}, (data) => {
-        onDataChange(data);
-        setRequestData(data);
-      }),
-      () => {}
+      fetchOrganizationCompletedRequest(
+        organizationProfile.id,
+        (data) => {
+          onDataChange(data);
+          setRequestData(data);
+        },
+        (errorMsg) => {
+          setTimeout(() => {
+            setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+          }, 100);
+        }
+      )
     );
+  };
+
+  const handleAlertClose = () => {
+    setAlertObj({ open: false, message: "", isSuccess: false });
   };
 
   const debounced = useCallback(debounce(fetchData, 1000), []);
@@ -44,7 +61,7 @@ export default function Completed({ onDataChange }) {
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     setFormObj(form);
     debounced();
   };
@@ -61,7 +78,15 @@ export default function Completed({ onDataChange }) {
 
   return (
     <div className="ic-org-completed-container">
-      <div className="ic-org-body-header">Completed Request</div>
+      {alertObj.open ? (
+        <ShowAlert
+          alertOpen={true}
+          message={alertObj.message}
+          isScuccess={alertObj.isSuccess}
+          handleAlertClose={() => handleAlertClose()}
+        />
+      ) : null}
+      <div className="ic-org-body-header">Completed</div>
       <div className="ic-search">
         <div className="ic-form-fields">
           <TextField
@@ -101,6 +126,13 @@ export default function Completed({ onDataChange }) {
                       color={chips[data.tag].color || "info"}
                       onClick={() => null}
                     />
+                    <Chip
+                      className="ic-chip"
+                      label={data.type}
+                      variant={"filled"}
+                      color={"success"}
+                      onClick={() => null}
+                    />
                   </div>
                   <div className="ic-content-wrapper">
                     <div className="ic-name" title={data.name}>
@@ -113,13 +145,13 @@ export default function Completed({ onDataChange }) {
                   <div className="ic-footer-wrapper">
                     <div className="ic-status-wrapper">
                       <div className="ic-badge">
-                        {data.products.filter((p) => !!p.isAcknowledged).length}
+                        {data.products.filter((p) => !!p.acknowledged).length}
                         /{data.products.length}
                       </div>
                       <div className="ic-badge-content">Completed</div>
                     </div>
                     <div className="ic-date">
-                      {new Date(data.createdDate).toDateString()}
+                      {new Date(data.raisedDate).toDateString()}
                     </div>
                   </div>
                 </div>

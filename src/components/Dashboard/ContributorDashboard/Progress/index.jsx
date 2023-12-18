@@ -10,6 +10,7 @@ import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
 import { fetchContributorCurrentRequest } from "../../../../store/organization/action";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import ShowAlert from "../../../../widgets/Alert";
 import { chips } from "../../../../utils/icare";
 import "./index.scss";
 
@@ -17,6 +18,11 @@ export default function Progress({ onDataChange }) {
   const contributorProfile = useSelector(
     (state) => state.user.contributorProfile
   );
+  const [alertObj, setAlertObj] = useState({
+    open: false,
+    message: "",
+    isSuccess: true,
+  });
   const [opendialog, setOpendialog] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const dispatch = useDispatch();
@@ -32,12 +38,22 @@ export default function Progress({ onDataChange }) {
 
   const fetchData = () => {
     dispatch(
-      fetchContributorCurrentRequest({}, (data) => {
-        onDataChange(data);
-        setRequestData(data);
-      }),
-      () => {}
+      fetchContributorCurrentRequest(contributorProfile.id,
+        (data) => {
+          onDataChange(data);
+          setRequestData(data);
+        },
+        (errorMsg) => {
+          setTimeout(() => {
+            setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+          }, 100);
+        }
+      )
     );
+  };
+
+  const handleAlertClose = () => {
+    setAlertObj({ open: false, message: "", isSuccess: false });
   };
 
   const debounced = useCallback(debounce(fetchData, 1000), []);
@@ -45,7 +61,7 @@ export default function Progress({ onDataChange }) {
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     setFormObj(form);
     debounced();
   };
@@ -62,7 +78,16 @@ export default function Progress({ onDataChange }) {
 
   return (
     <div className="ic-cont-progress-container">
-      <div className="ic-cont-body-header">Current Request</div>
+      {alertObj.open ? (
+        <ShowAlert
+          alertOpen={true}
+          message={alertObj.message}
+          isScuccess={alertObj.isSuccess}
+          handleAlertClose={() => handleAlertClose()}
+        />
+      ) : null}
+
+      <div className="ic-cont-body-header">In Progress ...</div>
       <div className="ic-search">
         <div className="ic-form-fields">
           <TextField
@@ -105,6 +130,13 @@ export default function Progress({ onDataChange }) {
                     />
                     <Chip
                       className="ic-chip"
+                      label={data.type}
+                      variant={"filled"}
+                      color={"success"}
+                      onClick={() => null}
+                    />
+                    <Chip
+                      className="ic-chip"
                       label={data.organization.city}
                       variant={"filled"}
                       color={"info"}
@@ -132,7 +164,7 @@ export default function Progress({ onDataChange }) {
                       <div className="ic-badge-content">Product(s)</div>
                     </div>
                     <div className="ic-date">
-                      {new Date(data.createdDate).toDateString()}
+                      {new Date(data.raisedDate).toDateString()}
                     </div>
                   </div>
                 </div>

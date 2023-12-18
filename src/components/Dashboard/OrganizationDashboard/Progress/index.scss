@@ -46,9 +46,14 @@
         flex-direction: column;
         position: relative;
         .ic-tag-wrapper {
+          display: flex;
+          flex-direction: column;
           position: absolute;
           right: 0;
-          margin: 15px 10px;
+          margin: 5px 10px;
+          .ic-chip {
+            margin: 10px 0 0 0;
+          }
         }
 
         .ic-icon {

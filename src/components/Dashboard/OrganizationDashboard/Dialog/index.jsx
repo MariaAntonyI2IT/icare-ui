@@ -21,7 +21,7 @@ import { useTheme } from "@mui/material/styles";
 import "./index.scss";
 
 export default function DialogModel(props) {
-  const { onClose, data, open, type } = props;
+  const { onClose, data, open, type, onAckProduct } = props;
   const [requestData, setRequestData] = useState({ ...data });
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -40,6 +40,7 @@ export default function DialogModel(props) {
   const onFormSubmit = (product) => {
     setAckDialogOpen(false);
     onClose();
+    onAckProduct(product);
   };
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function DialogModel(props) {
       <>
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            {product.name} ({product.qty} {product.unit})
+            {product.name} ({product.quantity} {product.unit})
           </StyledTableCell>
           <StyledTableCell component="th" scope="row">
             {product.orderId || ""}
@@ -82,9 +83,9 @@ export default function DialogModel(props) {
                 className="ic-ack-btn"
                 variant="contained"
                 onClick={() => onAcknowledgeClick(product)}
-                disabled={!!product.isAcknowledged || !product.orderId}
+                disabled={!!product.acknowledged || !product.orderId}
               >
-                {!!product.isAcknowledged ? "Acknowledged" : "Acknowledge"}
+                {!!product.acknowledged ? "Acknowledged" : "Acknowledge"}
               </Button>
             </StyledTableCell>
           )}
@@ -105,7 +106,7 @@ export default function DialogModel(props) {
             colSpan={6}
           >
             <Collapse in={tableOpen} timeout="auto" unmountOnExit>
-              {product.orderedBy && (
+              {product.contributedBy && (
                 <div className="ic-order-details">
                   <div className="ic-form-fields">
                     <TextField
@@ -120,9 +121,9 @@ export default function DialogModel(props) {
                   </div>
                   <div className="ic-form-fields">
                     <TextField
-                      value={`${product.orderedBy.firstName}${
-                        product.orderedBy.lastName
-                          ? " " + product.orderedBy.lastName
+                      value={`${product.contributedBy.firstName}${
+                        product.contributedBy.lastName
+                          ? " " + product.contributedBy.lastName
                           : ""
                       }`}
                       label="Name"
@@ -133,10 +134,10 @@ export default function DialogModel(props) {
                       fullWidth={true}
                     />
                   </div>
-                  {product.orderedBy.phoneNumber && (
+                  {product.contributedBy.phoneNumber && (
                     <div className="ic-form-fields">
                       <TextField
-                        value={product.orderedBy.phoneNumber}
+                        value={product.contributedBy.phoneNumber}
                         label="Phone Number"
                         variant="outlined"
                         autoComplete="new-password"
@@ -148,7 +149,7 @@ export default function DialogModel(props) {
                   )}
                   <div className="ic-form-fields">
                     <TextField
-                      value={product.orderedBy.mail}
+                      value={product.contributedBy.email}
                       label="Mail"
                       variant="outlined"
                       autoComplete="new-password"
@@ -159,7 +160,7 @@ export default function DialogModel(props) {
                   </div>
                   <div className="ic-form-fields">
                     <TextField
-                      value={new Date(product.orderDate).toDateString()}
+                      value={new Date(product.contributeDate).toDateString()}
                       label="Ordered date"
                       variant="outlined"
                       autoComplete="new-password"

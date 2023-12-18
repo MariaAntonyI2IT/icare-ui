@@ -8,7 +8,11 @@ import DialogModel from "./../Dialog";
 import VolunteerActivism from "@mui/icons-material/VolunteerActivism";
 import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
-import { fetchOrganizationCurrentRequest } from "../../../../store/organization/action";
+import {
+  fetchOrganizationCurrentRequest,
+  acknowledgeContributorRequest,
+} from "../../../../store/organization/action";
+import ShowAlert from "../../../../widgets/Alert";
 import "./index.scss";
 import { chips } from "../../../../utils/icare";
 
@@ -16,6 +20,11 @@ export default function Progress({ onDataChange }) {
   const organizationProfile = useSelector(
     (state) => state.user.organizationProfile
   );
+  const [alertObj, setAlertObj] = useState({
+    open: false,
+    message: "",
+    isSuccess: true,
+  });
   const [opendialog, setOpendialog] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const dispatch = useDispatch();
@@ -31,11 +40,18 @@ export default function Progress({ onDataChange }) {
 
   const fetchData = () => {
     dispatch(
-      fetchOrganizationCurrentRequest({}, (data) => {
-        onDataChange(data);
-        setRequestData(data);
-      }),
-      () => {}
+      fetchOrganizationCurrentRequest(
+        organizationProfile.id,
+        (data) => {
+          onDataChange(data);
+          setRequestData(data);
+        },
+        (errorMsg) => {
+          setTimeout(() => {
+            setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+          }, 100);
+        }
+      )
     );
   };
 
@@ -44,7 +60,7 @@ export default function Progress({ onDataChange }) {
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
-    form[field].value = value.trim();
+    form[field].value = value;
     setFormObj(form);
     debounced();
   };
@@ -54,6 +70,31 @@ export default function Progress({ onDataChange }) {
     setOpendialog(false);
   };
 
+  const handleAlertClose = () => {
+    setAlertObj({ open: false, message: "", isSuccess: false });
+  };
+
+  const ackProduct = (product) => {
+    dispatch(
+      acknowledgeContributorRequest(
+        product.id,
+        () => {
+          setAlertObj({
+            open: true,
+            message: "Product Acknowledged Successfully",
+            isSuccess: true,
+          });
+          fetchData();
+        },
+        (errorMsg) => {
+          setTimeout(() => {
+            setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+          }, 100);
+        }
+      )
+    );
+  };
+
   const onCardClick = (data) => {
     setSelectedRequest(data);
     setOpendialog(true);
@@ -61,7 +102,16 @@ export default function Progress({ onDataChange }) {
 
   return (
     <div className="ic-org-progress-container">
-      <div className="ic-org-body-header">Current Request</div>
+      {alertObj.open ? (
+        <ShowAlert
+          alertOpen={true}
+          message={alertObj.message}
+          isScuccess={alertObj.isSuccess}
+          handleAlertClose={() => handleAlertClose()}
+        />
+      ) : null}
+
+      <div className="ic-org-body-header">In Progress ...</div>
       <div className="ic-search">
         <div className="ic-form-fields">
           <TextField
@@ -101,6 +151,13 @@ export default function Progress({ onDataChange }) {
                       color={chips[data.tag].color || "info"}
                       onClick={() => null}
                     />
+                    <Chip
+                      className="ic-chip"
+                      label={data.type}
+                      variant={"filled"}
+                      color={"success"}
+                      onClick={() => null}
+                    />
                   </div>
                   <div className="ic-content-wrapper">
                     <div className="ic-name" title={data.name}>
@@ -113,13 +170,13 @@ export default function Progress({ onDataChange }) {
                   <div className="ic-footer-wrapper">
                     <div className="ic-status-wrapper">
                       <div className="ic-badge">
-                        {data.products.filter((p) => !!p.isAcknowledged).length}
+                        {data.products.filter((p) => !!p.acknowledged).length}
                         /{data.products.length}
                       </div>
                       <div className="ic-badge-content">Completed</div>
                     </div>
                     <div className="ic-date">
-                      {new Date(data.createdDate).toDateString()}
+                      {new Date(data.raisedDate).toDateString()}
                     </div>
                   </div>
                 </div>
@@ -132,6 +189,7 @@ export default function Progress({ onDataChange }) {
       </div>
       <DialogModel
         type={"progress"}
+        onAckProduct={ackProduct}
         open={opendialog}
         data={selectedRequest}
         onClose={onDialoglose}

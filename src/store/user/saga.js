@@ -1,14 +1,21 @@
 import {put,call,takeEvery} from 'redux-saga/effects'
-import {login,loginGoogle,fetchProfile} from '../../services/user';
+import {
+  login,loginGoogle,fetchProfile,sendOtpService,verifyOtpService,
+  createContributorAccountService,createOrganizationAccountService,verifyOrganizationAccountService
+} from '../../services/user';
 import CryptoJS from 'crypto-js';
 import {
   CLEAR_PROFILE_REQUESTED,
   FETCH_PROFILE_REQUESTED,
   FORGOT_PASSWORD_REQUESTED,GOOGLE_LOGIN_USER_REQUESTED,LOGIN_USER_REQUESTED,
-  REGISTER_CONTRIBUTOR_REQUESTED,REGISTER_ORGANIZATION_REQUESTED,SEND_OTP_REQUESTED,VERIFY_ORGANIZATION_REQUESTED,VERIFY_OTP_REQUESTED
+  REGISTER_CONTRIBUTOR_REQUESTED,REGISTER_ORGANIZATION_REQUESTED,SEND_OTP_REQUESTED,
+  VERIFY_ORGANIZATION_REQUESTED,VERIFY_OTP_REQUESTED
 } from './actionTypes';
-import {updateContributorProfile,updateOrganizationProfile,updateToken,updateLoggedIn,updateInitialized,clearUserData} from './reducer';
-import {enableLoginLoader, disableLoginLoader} from './../login/reducer';
+import {
+  updateContributorProfile,updateOrganizationProfile,
+  updateToken,updateLoggedIn,updateInitialized,clearUserData,
+} from './reducer';
+import {enableLoginLoader,disableLoginLoader} from './../login/reducer';
 import {appConfig} from '../../utils/constants';
 import {setSession} from '../../utils/session';
 
@@ -97,44 +104,38 @@ function* loginGoogleUser(action) {
 function* rgisterContributor(action) {
   try {
     yield put(enableLoginLoader());
-    yield call(mockApi,1500);
+    const hmac = CryptoJS.HmacSHA512(action.payload.password,process.env.REACT_APP_PASSWORD_HASH_KEY);
+    action.payload.password = hmac.toString(CryptoJS.enc.Hex);
+    yield call(createContributorAccountService,action.payload);
     yield put(disableLoginLoader());
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,1500);
     yield put(disableLoginLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* rgisterOrganization(action) {
   try {
     yield put(enableLoginLoader());
-    yield call(mockApi,1500);
+    const hmac = CryptoJS.HmacSHA512(action.payload.password,process.env.REACT_APP_PASSWORD_HASH_KEY);
+    action.payload.password = hmac.toString(CryptoJS.enc.Hex);
+    yield call(createOrganizationAccountService,action.payload);
     yield put(disableLoginLoader());
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,1500);
     yield put(disableLoginLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* verifyOrganization(action) {
   try {
-    yield call(mockApi,1500);
-    const mockData = {
-      uid: 'IC-2666',
-      name: 'BRAVE VISION SPORTS FOUNDATION',
-      registrationNumber: 'U85300TN2021NPL148796',
-      ngoId: 'TN/2022/0316055',
-      state: 'TAMIL NADU',
-      email: 'sbravevisionsportsacademy21@gmail.com'
-    };
-    action?.successCb(mockData);
+    const {data} = yield call(verifyOrganizationAccountService,action.payload);
+    data.uid = data.userId;
+    action?.successCb(data);
   } catch(e) {
-    yield call(mockApi,1500);
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
@@ -147,35 +148,31 @@ function* forgotPassword(action) {
   } catch(e) {
     yield call(mockApi,1500);
     yield put(disableLoginLoader());
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* sendOtp(action) {
   try {
-    yield call(mockApi,1500);
+    yield call(sendOtpService,action.payload);
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,1500);
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
 
 function* verifyOtp(action) {
   try {
-    yield call(mockApi,1500);
+    yield call(verifyOtpService,action.payload);
     action?.successCb();
   } catch(e) {
-    yield call(mockApi,1500);
-    action?.failureCb(e.message);
+    action?.failureCb(e.response?.data?.message || e.message);
   }
 }
-
 
 function* clearProfile() {
   yield put(clearUserData());
 }
-
 
 const mockApi = (time) => {
   return new Promise((resolve,reject) => {

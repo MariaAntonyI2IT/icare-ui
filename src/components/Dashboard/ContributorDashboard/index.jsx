@@ -23,7 +23,7 @@ export default function ContributorDashboard() {
       ),
     },
     progress: {
-      name: "Current Request",
+      name: "In Progress ...",
       badge: "",
       selected: false,
       icon: <PendingIcon />,
@@ -32,7 +32,7 @@ export default function ContributorDashboard() {
       ),
     },
     completed: {
-      name: "Completed Request",
+      name: "Completed",
       badge: "",
       selected: false,
       icon: <CheckCircleIcon />,

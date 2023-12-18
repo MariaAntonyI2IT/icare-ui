@@ -60,7 +60,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-  
+
       .ic-card {
         @media only screen and (min-width: 650px) {
           margin: 20px 50px;
@@ -80,7 +80,6 @@
             position: absolute;
             right: 0;
             margin: 5px 10px;
-
             .ic-chip {
               margin: 10px 0 0 0;
             }
