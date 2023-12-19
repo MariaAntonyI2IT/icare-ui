@@ -18,6 +18,7 @@ import Paper from "@mui/material/Paper";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Acknowledge from "./Acknowledge";
 import { useTheme } from "@mui/material/styles";
+import cover from './../../../../assets/cover.jpg';
 import "./index.scss";
 
 export default function DialogModel(props) {
@@ -193,6 +194,7 @@ export default function DialogModel(props) {
           fullWidth={true}
           fullScreen={isMatch}
         >
+          <img src={cover} className="ic-cover" />
           <div className="ic-org-progress-dialog-container">
             <div className="ic-org-body-header-container">
               <div className="ic-org-body-header">Request detail</div>

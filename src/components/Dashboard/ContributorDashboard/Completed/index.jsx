@@ -209,9 +209,29 @@ export default function Completed({ onDataChange }) {
                 key={index}
               >
                 <div className="ic-card-content">
-                  <IconButton className="ic-icon" disableRipple={true}>
-                    <VolunteerActivism />
-                  </IconButton>
+                  <div className="ic-content-wrapper">
+                    <div className="ic-name" title={data.name}>
+                      {data.name}
+                    </div>
+                    <div className="ic-description" title={data.description}>
+                      {data.description}
+                    </div>
+                    <div className="ic-org">
+                      <div className="ic-org-createdby">Posted by</div>
+                      <div className="ic-org-name">
+                        {data.organization.name}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="ic-footer-wrapper">
+                    <div className="ic-status-wrapper">
+                      <div className="ic-badge">{data.products.length}</div>
+                      <div className="ic-badge-content">Product(s)</div>
+                    </div>
+                    <div className="ic-date">
+                      {new Date(data.raisedDate).toDateString()}
+                    </div>
+                  </div>
                   <div className="ic-tag-wrapper">
                     <Chip
                       className="ic-chip"
@@ -235,29 +255,6 @@ export default function Completed({ onDataChange }) {
                       icon={<LocationOnIcon />}
                       onClick={() => null}
                     />
-                  </div>
-                  <div className="ic-content-wrapper">
-                    <div className="ic-name" title={data.name}>
-                      {data.name}
-                    </div>
-                    <div className="ic-description" title={data.description}>
-                      {data.description}
-                    </div>
-                    <div className="ic-org">
-                      <div className="ic-org-createdby">Posted by</div>
-                      <div className="ic-org-name">
-                        {data.organization.name}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="ic-footer-wrapper">
-                    <div className="ic-status-wrapper">
-                      <div className="ic-badge">{data.products.length}</div>
-                      <div className="ic-badge-content">Product(s)</div>
-                    </div>
-                    <div className="ic-date">
-                      {new Date(data.raisedDate).toDateString()}
-                    </div>
                   </div>
                 </div>
               </div>

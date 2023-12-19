@@ -239,33 +239,6 @@ export default function SearchComponent({ onDataChange }) {
                 key={index}
               >
                 <div className="ic-card-content">
-                  <IconButton className="ic-icon" disableRipple={true}>
-                    <VolunteerActivism />
-                  </IconButton>
-                  <div className="ic-tag-wrapper">
-                    <Chip
-                      className="ic-chip"
-                      label={data.tag}
-                      variant={"filled"}
-                      color={chips[data.tag].color || "info"}
-                      onClick={() => null}
-                    />
-                    <Chip
-                      className="ic-chip"
-                      label={data.type}
-                      variant={"filled"}
-                      color={"info"}
-                      onClick={() => null}
-                    />
-                    <Chip
-                      className="ic-chip"
-                      label={data.organization.city}
-                      variant={"filled"}
-                      color={"info"}
-                      icon={<LocationOnIcon />}
-                      onClick={() => null}
-                    />
-                  </div>
                   <div className="ic-content-wrapper">
                     <div className="ic-name" title={data.name}>
                       {data.name}
@@ -288,6 +261,30 @@ export default function SearchComponent({ onDataChange }) {
                     <div className="ic-date">
                       {new Date(data.raisedDate).toDateString()}
                     </div>
+                  </div>
+                  <div className="ic-tag-wrapper">
+                    <Chip
+                      className="ic-chip"
+                      label={data.tag}
+                      variant={"filled"}
+                      color={chips[data.tag].color || "info"}
+                      onClick={() => null}
+                    />
+                    <Chip
+                      className="ic-chip"
+                      label={data.type}
+                      variant={"filled"}
+                      color={"success"}
+                      onClick={() => null}
+                    />
+                    <Chip
+                      className="ic-chip"
+                      label={data.organization.city}
+                      variant={"filled"}
+                      color={"info"}
+                      icon={<LocationOnIcon />}
+                      onClick={() => null}
+                    />
                   </div>
                 </div>
               </div>

@@ -20,6 +20,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import "./index.scss";
 import { Link } from "react-router-dom";
+import cover from './../../../../assets/cover.jpg';
 import Order from "./Order";
 
 export default function DialogModel(props) {
@@ -113,6 +114,7 @@ export default function DialogModel(props) {
           fullWidth={true}
           fullScreen={isMatch}
         >
+           <img src={cover} className="ic-cover" />
           <div className="ic-org-progress-dialog-container">
             <div className="ic-org-body-header-container">
               <div className="ic-org-body-header">Request detail</div>

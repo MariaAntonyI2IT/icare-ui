@@ -86,7 +86,7 @@
         @media only screen and (max-width: 650px) {
           margin: 20px;
         }
-        width: 500px;
+        width: 450px;
 
         .ic-card-content {
           display: flex;
@@ -94,13 +94,8 @@
           position: relative;
           .ic-tag-wrapper {
             display: flex;
-            flex-direction: column;
-            position: absolute;
-            right: 0;
-            margin: 5px 10px;
-            .ic-chip {
-              margin: 10px 0 0 0;
-            }
+            justify-content: space-evenly;
+            padding-bottom: 20px;
           }
 
           .ic-icon {
@@ -112,6 +107,7 @@
           }
 
           .ic-content-wrapper {
+            padding-top: 20px;
             .ic-name {
               font-size: 18px;
               font-weight: 600;
