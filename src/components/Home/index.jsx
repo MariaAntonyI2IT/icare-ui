@@ -13,16 +13,26 @@ import ShowAlert from "../../widgets/Alert";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useNavigate } from "react-router-dom";
 import { chips } from "../../utils/icare";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { getFilteredRequestData } from "../../utils";
 import "./index.scss";
 
 export default function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formObj, setFormObj] = useState({
-    name: { value: "", error: "", dirty: false, isMandatory: true },
+    name: { value: "", error: "", dirty: false, isMandatory: false },
+    type: { value: "", error: "", dirty: false, isMandatory: false },
+    priority: { value: "", error: "", dirty: false, isMandatory: false },
+    category: { value: "", error: "", dirty: false, isMandatory: false },
   });
 
   const [requestData, setRequestData] = useState(null);
+
+  const [fullData, setFullData] = useState(null);
 
   const [alertObj, setAlertObj] = useState({
     open: false,
@@ -38,26 +48,51 @@ export default function Home() {
     setAlertObj({ open: false, message: "", isSuccess: false });
   };
 
-  const fetchData = () => {
-    dispatch(
-      fetchContributorSearchRequest({}, (data) => {
-        setRequestData(data);
-      }, (errorMsg) => {
-        setTimeout(() => {
-          setAlertObj({ open: true, message: errorMsg, isSuccess: false });
-        }, 100);
-      })
-    );
+  const fetchData = (dataList = null) => {
+    const payload = {
+      searchText: formObj.name.value,
+      filter: {
+        type: formObj.type.value,
+        priority: formObj.priority.value,
+        category: formObj.category.value,
+      },
+    };
+    if (dataList) {
+      setRequestData(getFilteredRequestData(dataList, payload));
+    } else {
+      dispatch(
+        fetchContributorSearchRequest(
+          {},
+          (data) => {
+            setRequestData(data);
+            setFullData(data);
+          },
+          (errorMsg) => {
+            setTimeout(() => {
+              setAlertObj({ open: true, message: errorMsg, isSuccess: false });
+            }, 100);
+          }
+        )
+      );
+    }
   };
 
-  const debounced = useCallback(debounce(fetchData, 1000), []);
+  const debounced = useCallback(debounce(fetchData, 300), []);
+
+  const onSortChange = (e, item, type) => {
+    const value = item.props.value;
+    const form = { ...formObj };
+    form[type].value = value;
+    setFormObj(form);
+    fetchData(fullData);
+  };
 
   const onValueChange = (e, field) => {
     const value = e.currentTarget.value;
     const form = { ...formObj };
     form[field].value = value;
     setFormObj(form);
-    debounced();
+    debounced(fullData);
   };
 
   const onCardClick = (data) => {
@@ -91,7 +126,7 @@ export default function Home() {
             <TextField
               value={formObj.name.value}
               onChange={(e) => onValueChange(e, "name")}
-              label="Search by name, description"
+              label="Request Name"
               variant="outlined"
               autoComplete="new-password"
               InputProps={{
@@ -104,6 +139,64 @@ export default function Home() {
               fullWidth={true}
             />
             <TextField value={"mock"} className={"ic-hide-form"} />
+          </div>
+        </div>
+        <div className="ic-sort">
+          <div className="ic-form-fields">
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <InputLabel id="demo-select-small-label">Priority</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                value={formObj.priority.value}
+                onChange={(e, item) => onSortChange(e, item, "priority")}
+                label="Priority"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"Low"}>Low</MenuItem>
+                <MenuItem value={"Medium"}>Medium</MenuItem>
+                <MenuItem value={"High"}>High</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div className="ic-form-fields">
+            <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+              <InputLabel id="demo-select-small-label">Type</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                value={formObj.type.value}
+                onChange={(e, item) => onSortChange(e, item, "type")}
+                label="Type"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"Children Home"}>Children Home</MenuItem>
+                <MenuItem value={"Oldage Home"}>Oldage Home</MenuItem>
+                <MenuItem value={"Specially Abled"}>Specially Abled</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div className="ic-form-fields">
+            <FormControl sx={{ m: 1, minWidth: 130 }} size="small">
+              <InputLabel id="demo-select-small-label">Category</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                value={formObj.category.value}
+                onChange={(e, item) => onSortChange(e, item, "category")}
+                label="Category"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"Grocery"}>Grocery</MenuItem>
+                <MenuItem value={"Stationery"}>Stationery</MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </div>
         <div className="ic-card-container">

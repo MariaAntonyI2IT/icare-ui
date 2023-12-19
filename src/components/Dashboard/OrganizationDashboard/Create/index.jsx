@@ -237,6 +237,7 @@ export default function Create() {
         products: itemList.map((item) => {
           return {
             name: item.product.value.name,
+            category: item.product.value.category,
             quantity: item.quantity.value,
             link: item.product.value.link,
             unit: item.quantity.label,

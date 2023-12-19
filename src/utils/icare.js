@@ -35,8 +35,8 @@ export const products = [
   {id: 13,name: 'Orid dhaal',unit: 'Kg',min: 1,max: 10,category: categories.grocery,link: 'https://www.bigbasket.com/pd/60000206/udhaiyam-dhall-orid-1-kg-pouch/?nc=as'},
   {id: 14,name: 'Eraser',unit: 'Qty',min: 1,max: 50,category: categories.stationery,link: 'https://www.bigbasket.com/pd/20004358/apsara-non-dust-eraser-non-toxic-dust-free-20-pcs/?nc=as'},
   {id: 15,name: 'Blue Pen',unit: 'Qty',min: 1,max: 40,category: categories.stationery,link: 'https://www.bigbasket.com/pd/40126495/reynolds-ball-pen-brite-blue-5-pcs/?nc=as'}
-
 ];
+
 export const chips = {
   "Low": {
     color: "info"

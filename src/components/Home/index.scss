@@ -54,6 +54,14 @@
       }
     }
 
+    .ic-sort {
+      display: flex;
+      justify-content: center;
+      .ic-form-fields {
+        padding: 10px 20px;
+      }
+    }
+
     .ic-card-container {
       width: 100%;
       padding: 10px 0;

@@ -4,7 +4,7 @@ export const mockData = {
       {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         products: [
           {
@@ -55,7 +55,7 @@ export const mockData = {
       {
         name: 'Things for Children',
         description: 'We are in need of stationery items Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         products: [
           {
@@ -88,7 +88,7 @@ export const mockData = {
       {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         products: [
           {
@@ -138,7 +138,7 @@ export const mockData = {
       },  {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         products: [
           {
@@ -191,7 +191,7 @@ export const mockData = {
       {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         products: [
           {
@@ -242,7 +242,7 @@ export const mockData = {
       {
         name: 'Things for Children',
         description: 'We are in need of stationery items Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         products: [
           {
@@ -296,7 +296,7 @@ export const mockData = {
       {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
@@ -357,7 +357,7 @@ export const mockData = {
       {
         name: 'Things for Children',
         description: 'We are in need of stationery items Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Emergency',
+        tag: 'High',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
@@ -401,7 +401,7 @@ export const mockData = {
       {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
@@ -461,7 +461,7 @@ export const mockData = {
       }, {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
@@ -524,7 +524,7 @@ export const mockData = {
       {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
@@ -568,7 +568,7 @@ export const mockData = {
       {
         name: 'Things for Children',
         description: 'We are in need of stationery items Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Emergency',
+        tag: 'High',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
@@ -614,7 +614,7 @@ export const mockData = {
       {
         name: 'Feeding Children',
         description: 'We are in need of foods to create balanced and nourishing meals for these children. Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Urgent',
+        tag: 'Medium',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
@@ -658,7 +658,7 @@ export const mockData = {
       {
         name: 'Things for Children',
         description: 'We are in need of stationery items Any support you can provide will go a long way in making a positive impact on their health and well-being.',
-        tag: 'Emergency',
+        tag: 'High',
         raisedDate: '2023-02-01',
         organization: {
           uid: 'IC-2666',
