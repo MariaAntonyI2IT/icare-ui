@@ -21,7 +21,11 @@ export default function Header({ isHome = false }) {
   };
 
   const onHomeBtnClick = () => {
-    navigate(0);
+    if (window.location.pathname.indexOf("profile") !== -1) {
+      navigate("/dashboard");
+    } else {
+      navigate(0);
+    }
   };
 
   const onProfileBtnClick = () => {
@@ -42,7 +46,11 @@ export default function Header({ isHome = false }) {
       </div>
       {isHome ? (
         <div className="ic-profile">
-          <Button className="ic-signin" variant="contained" onClick={() => onLoginClick()}>
+          <Button
+            className="ic-signin"
+            variant="contained"
+            onClick={() => onLoginClick()}
+          >
             Sign in
           </Button>
         </div>

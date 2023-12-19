@@ -59,7 +59,8 @@ export default function Completed({ onDataChange }) {
           organizationProfile.id,
           (data) => {
             onDataChange(data);
-            setRequestData(data);
+            const filteredData = getFilteredRequestData(data, payload);
+            setRequestData(filteredData);
             setFullData(data);
           },
           (errorMsg) => {
@@ -235,10 +236,9 @@ export default function Completed({ onDataChange }) {
                   <div className="ic-footer-wrapper">
                     <div className="ic-status-wrapper">
                       <div className="ic-badge">
-                        {data.products.filter((p) => !!p.acknowledged).length}/
                         {data.products.length}
                       </div>
-                      <div className="ic-badge-content">Completed</div>
+                      <div className="ic-badge-content">Product(s)</div>
                     </div>
                     <div className="ic-date">
                       {new Date(data.raisedDate).toDateString()}

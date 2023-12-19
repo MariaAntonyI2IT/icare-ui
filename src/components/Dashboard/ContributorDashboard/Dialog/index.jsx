@@ -31,6 +31,7 @@ export default function DialogModel(props) {
   const [orderProduct, setOrderProduct] = useState();
 
   const onAcknowledgeClick = (product) => {
+    window.open(product.link, "_blank");
     setOrderProduct(product);
     setOrderDialogOpen(true);
   };

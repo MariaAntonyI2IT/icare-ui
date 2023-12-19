@@ -68,6 +68,8 @@ export default function SearchComponent({ onDataChange }) {
           (data) => {
             onDataChange(data);
             setRequestData(data);
+            const filteredData = getFilteredRequestData(data, payload);
+            setRequestData(filteredData);
             setFullData(data);
           },
           (errorMsg) => {
@@ -129,7 +131,7 @@ export default function SearchComponent({ onDataChange }) {
   };
 
   const onDialoglose = () => {
-    fetchData();
+    fetchData(fullData);
     setOpendialog(false);
   };
 

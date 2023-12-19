@@ -59,7 +59,7 @@ export default function ContributorProfile() {
         <div className="ic-form-fields">
           <TextField
             value={contributorProfile.phoneNumber}
-            label="Phone Name"
+            label="Phone Number"
             variant="outlined"
             autoComplete="new-password"
             disabled={true}

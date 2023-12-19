@@ -60,7 +60,8 @@ export default function Completed({ onDataChange }) {
           contributorProfile.id,
           (data) => {
             onDataChange(data);
-            setRequestData(data);
+            const filteredData = getFilteredRequestData(data, payload);
+            setRequestData(filteredData);
             setFullData(data);
           },
           (errorMsg) => {

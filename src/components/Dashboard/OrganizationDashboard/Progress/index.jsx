@@ -66,7 +66,8 @@ export default function Progress({ onDataChange }) {
           organizationProfile.id,
           (data) => {
             onDataChange(data);
-            setRequestData(data);
+            const filteredData = getFilteredRequestData(data, payload);
+            setRequestData(filteredData);
             setFullData(data);
           },
           (errorMsg) => {
@@ -98,7 +99,7 @@ export default function Progress({ onDataChange }) {
   };
 
   const onDialoglose = () => {
-    fetchData();
+    fetchData(fullData);
     setOpendialog(false);
   };
 
@@ -260,10 +261,10 @@ export default function Progress({ onDataChange }) {
                   <div className="ic-footer-wrapper">
                     <div className="ic-status-wrapper">
                       <div className="ic-badge">
-                        {data.products.filter((p) => !!p.acknowledged).length}/
+                        {data.products.filter((p) => !!p.orderId).length}/
                         {data.products.length}
                       </div>
-                      <div className="ic-badge-content">Completed</div>
+                      <div className="ic-badge-content">Progress</div>
                     </div>
                     <div className="ic-date">
                       {new Date(data.raisedDate).toDateString()}

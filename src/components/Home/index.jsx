@@ -65,6 +65,8 @@ export default function Home() {
           {},
           (data) => {
             setRequestData(data);
+            const filteredData = getFilteredRequestData(data, payload);
+            setRequestData(filteredData);
             setFullData(data);
           },
           (errorMsg) => {

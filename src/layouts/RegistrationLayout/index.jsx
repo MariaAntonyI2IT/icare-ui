@@ -5,7 +5,7 @@ import "./index.scss";
 export default function RegistrationLayout(props) {
   const navigate = useNavigate();
   const onHomeBtnClick = () => {
-    navigate("/dashboard");
+    navigate("/login");
   };
   return (
     <div className="ic-registration-container">
