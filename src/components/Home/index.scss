@@ -57,8 +57,18 @@
     .ic-sort {
       display: flex;
       justify-content: center;
+
+      @media only screen and (max-width: 650px) {
+        flex-wrap: wrap;
+      }
       .ic-form-fields {
         padding: 10px 20px;
+        @media only screen and (min-width: 650px) {
+          width: 183px;
+        }
+        @media only screen and (max-width: 650px) {
+          min-width: 100%;
+        }
       }
     }
 

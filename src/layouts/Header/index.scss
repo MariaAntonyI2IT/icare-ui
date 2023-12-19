@@ -1,8 +1,8 @@
 @import "./../../styles/variables";
 
-.ic-header-container {
+.ic-header-main-container {
   height: 80px;
-  box-shadow: 0 5px 3px -5px grey;
+  box-shadow: -2em 1em 50px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #3f3f3f;
   display: flex;
   justify-content: space-between;
 
@@ -36,7 +36,7 @@
     }
     .ic-header-name {
       font-size: 36px;
-      font-weight: 600;
+      font-weight: 600 ;;
       color: $app-primary-color;
     }
   }
@@ -58,6 +58,7 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
+      z-index: 1;
     }
   }
 }

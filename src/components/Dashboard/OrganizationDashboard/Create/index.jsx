@@ -371,7 +371,7 @@ export default function Create() {
                   >
                     {getDDnOptions().map((option, index) => {
                       return option.type === "header" ? (
-                        <ListSubheader sx={{ color: "#30a0b1" }} key={index}>
+                        <ListSubheader sx={{ color: "#1342ad" }} key={index}>
                           {option.value}
                         </ListSubheader>
                       ) : (

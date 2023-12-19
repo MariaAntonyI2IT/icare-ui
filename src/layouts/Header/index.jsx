@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import logo from "./../../assets/logo.png";
+import logo from "./../../assets/logo.svg";
 import Button from "@mui/material/Button";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { clearProfile } from "./../../store/user/action";
@@ -37,7 +37,7 @@ export default function Header({ isHome = false }) {
   };
 
   return (
-    <div className="ic-header-container">
+    <div className="ic-header-main-container">
       <div className="ic-header-name-wrapper" onClick={() => onHomeBtnClick()}>
         <div className="ic-header-logo">
           <img src={logo} alt={"Icare App logo"} />

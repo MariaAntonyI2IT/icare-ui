@@ -11,12 +11,13 @@ import { getSession } from "./utils/session";
 import "./styles/index.scss";
 import "./styles/widget.scss";
 import { appConfig } from "./utils/constants";
+import cover from "./assets/cover.jpg";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#30a0b1",
-    },
+      main: "#1342ad",
+    }
   },
 });
 const token = getSession(appConfig.token);
@@ -27,6 +28,7 @@ setupInterceptors(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
+    <img className="ic-cover" src={cover} alt="Cover" />
     <GoogleOAuthProvider clientId={process.env.REACT_APP_OAUTH_CLIENT_ID}>
       <ThemeProvider theme={theme}>
         <App />

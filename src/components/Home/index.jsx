@@ -145,7 +145,7 @@ export default function Home() {
         </div>
         <div className="ic-sort">
           <div className="ic-form-fields">
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <FormControl fullWidth={true}>
               <InputLabel id="demo-select-small-label">Priority</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -164,7 +164,7 @@ export default function Home() {
             </FormControl>
           </div>
           <div className="ic-form-fields">
-            <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+            <FormControl fullWidth={true}>
               <InputLabel id="demo-select-small-label">Type</InputLabel>
               <Select
                 labelId="demo-select-small-label"
@@ -183,7 +183,7 @@ export default function Home() {
             </FormControl>
           </div>
           <div className="ic-form-fields">
-            <FormControl sx={{ m: 1, minWidth: 130 }} size="small">
+            <FormControl fullWidth={true}>
               <InputLabel id="demo-select-small-label">Category</InputLabel>
               <Select
                 labelId="demo-select-small-label"

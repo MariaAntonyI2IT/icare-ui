@@ -52,7 +52,7 @@ export default function DialogModel(props) {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#30a0b1",
+      backgroundColor: "#1342ad",
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {

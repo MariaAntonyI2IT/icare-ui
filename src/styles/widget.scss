@@ -5,7 +5,11 @@ button.MuiButton-root {
 }
 
 .ic-spinner.MuiBackdrop-root {
-  background-color: #fff !important;
+}
+
+.MuiDialog-container {
+  background-color: transparent !important;
+  opacity: .9 !important;
 }
 
 .ic-form-error-msg {
@@ -22,15 +26,11 @@ button.MuiButton-root {
 }
 
 .ic-card {
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
-    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(207, 14, 14, 0.12) 0px 1px 3px 0px;
-  background-color: #fff;
+  box-shadow: 0em 0em 38px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #656565;
   cursor: pointer;
 
   &.ic-selected {
-    box-shadow: $app-primary-color 0px 0px 1px 2px,
-      $app-primary-color 0px 0px 1px 2px, $app-primary-color 0px 0px 1px 2px;
-    background-color: #fff;
+    box-shadow: 0em 0em 15px $app-primary-color, inset 0px 0px 80px #656565 !important;
   }
 }
 

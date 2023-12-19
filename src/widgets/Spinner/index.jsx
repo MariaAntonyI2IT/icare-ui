@@ -8,7 +8,7 @@ export default function Spinner({ loading, fullViewPort = true, bg }) {
         height="80"
         width="80"
         radius="9"
-        color="#30a0b1"
+        color="#1342ad"
         ariaLabel="three-dots-loading"
         visible={true}
       />

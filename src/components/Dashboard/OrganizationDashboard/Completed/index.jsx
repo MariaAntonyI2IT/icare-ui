@@ -141,7 +141,7 @@ export default function Completed({ onDataChange }) {
       </div>
       <div className="ic-sort">
         <div className="ic-form-fields">
-          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <FormControl fullWidth={true}>
             <InputLabel id="demo-select-small-label">Priority</InputLabel>
             <Select
               labelId="demo-select-small-label"
@@ -160,7 +160,7 @@ export default function Completed({ onDataChange }) {
           </FormControl>
         </div>
         <div className="ic-form-fields">
-          <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+          <FormControl fullWidth={true}>
             <InputLabel id="demo-select-small-label">Type</InputLabel>
             <Select
               labelId="demo-select-small-label"
@@ -179,7 +179,7 @@ export default function Completed({ onDataChange }) {
           </FormControl>
         </div>
         <div className="ic-form-fields">
-          <FormControl sx={{ m: 1, minWidth: 130 }} size="small">
+          <FormControl fullWidth={true}>
             <InputLabel id="demo-select-small-label">Category</InputLabel>
             <Select
               labelId="demo-select-small-label"
@@ -235,9 +235,7 @@ export default function Completed({ onDataChange }) {
                   </div>
                   <div className="ic-footer-wrapper">
                     <div className="ic-status-wrapper">
-                      <div className="ic-badge">
-                        {data.products.length}
-                      </div>
+                      <div className="ic-badge">{data.products.length}</div>
                       <div className="ic-badge-content">Product(s)</div>
                     </div>
                     <div className="ic-date">
