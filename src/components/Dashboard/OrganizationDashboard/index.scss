@@ -41,8 +41,6 @@
         margin: 0 25px;
         height: 80px;
         position: relative;
-        box-shadow: 0em 0em 10px rgba(0, 0, 0, 0.9),
-            inset 0px 0px 80px #656565;
         &:hover{
           background-color: #f9f9f9;
         }
@@ -100,7 +98,6 @@
         .ic-card {
           padding: 16px 20px;
           margin: 25px 10px;
-          box-shadow: 0em 0em 10px rgba(0, 0, 0, 0.9), inset 0px 0px 80px #8f8f8f;
           .ic-card-content {
             display: flex;
             justify-content: flex-start;

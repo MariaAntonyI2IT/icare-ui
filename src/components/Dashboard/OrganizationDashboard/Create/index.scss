@@ -1,7 +1,6 @@
 @import "./../../../../styles/variables";
 
 .ic-org-create-container {
-  box-shadow: 0em 0em 38px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #656565;
   padding-bottom: 30px;
   @media only screen and (min-width: 650px) {
     width: 550px;
@@ -47,4 +46,8 @@
       }
     }
   }
+}
+
+.ic-dark .ic-org-create-container {
+  box-shadow: 0em 0em 38px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #656565;
 }

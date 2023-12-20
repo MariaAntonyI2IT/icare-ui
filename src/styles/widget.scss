@@ -4,7 +4,7 @@ button.MuiButton-root {
   text-transform: none !important;
 }
 
-.MuiAccordion-root{
+.MuiAccordion-root {
   background-color: transparent !important;
 }
 
@@ -22,13 +22,26 @@ button.MuiButton-root {
 }
 
 .ic-card {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(207, 14, 14, 0.12) 0px 1px 3px 0px;
+  background-color: #fff;
+  cursor: pointer;
+
+  &.ic-selected {
+    box-shadow: $app-primary-color 0px 0px 1px 2px,
+      $app-primary-color 0px 0px 1px 2px, $app-primary-color 0px 0px 1px 2px;
+    background-color: #fff;
+  }
+}
+
+.ic-dark .ic-card {
   box-shadow: 0em 0em 38px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #656565;
   background-color: lightgrey;
   cursor: pointer;
 
   &.ic-selected {
     box-shadow: 0em 0em 15px $app-primary-color, inset 0px 0px 60px #656565 !important;
-    
+    background-color: lightgrey;
   }
 }
 

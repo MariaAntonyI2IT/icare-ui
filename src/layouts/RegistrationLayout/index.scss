@@ -29,8 +29,10 @@
     }
   }
 
+  
   .ic-body-container {
-    box-shadow: 0em 0em 38px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #656565;
+    box-shadow: 0em 0em 1px rgba(255, 255, 255, 0.25),
+      inset 0px 0px 5px rgba(0, 0, 0, 0.25);
     padding: 10px 0 10px 0;
     height: 550px;
     margin-bottom: 20px;
@@ -42,4 +44,8 @@
       min-width: 100%;
     }
   }
+}
+
+.ic-dark .ic-body-container {
+  box-shadow: 0em 0em 38px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #656565;
 }

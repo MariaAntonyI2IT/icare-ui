@@ -249,14 +249,6 @@ export default function Home() {
                         color={"success"}
                         onClick={() => null}
                       />
-                      <Chip
-                        className="ic-chip"
-                        label={data.organization.city}
-                        variant={"filled"}
-                        color={"info"}
-                        icon={<LocationOnIcon />}
-                        onClick={() => null}
-                      />
                     </div>
                   </div>
                 </div>

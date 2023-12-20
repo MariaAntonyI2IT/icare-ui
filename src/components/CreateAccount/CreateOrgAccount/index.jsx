@@ -152,7 +152,7 @@ export default function CreateOrgAccount() {
           if (!value) {
             form[field].error = "Please enter OTP";
           } else if (value.length !== 4) {
-            form[field].error = "OTP should be 6 digit";
+            form[field].error = "OTP should be 4 digit";
           }
           break;
         case "password":
@@ -305,14 +305,14 @@ export default function CreateOrgAccount() {
         registerOrganization(
           obj,
           () => {
-            navigate("/login");
+            setAlertObj({
+              open: true,
+              message: "Account Created Successfully",
+              isSuccess: true,
+            });
             setTimeout(() => {
-              setAlertObj({
-                open: true,
-                message: "Account Created Successfully",
-                isSuccess: true,
-              });
-            }, 100);
+              navigate("/login");
+            }, 500);
           },
           (errorMsg) => {
             setTimeout(() => {

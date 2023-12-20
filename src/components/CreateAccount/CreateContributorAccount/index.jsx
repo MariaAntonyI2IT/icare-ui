@@ -117,7 +117,7 @@ export default function CreateContributorAccount() {
           if (!value) {
             form[field].error = "Please enter OTP";
           } else if (value.length !== 4) {
-            form[field].error = "OTP should be 6 digit";
+            form[field].error = "OTP should be 4 digit";
           }
           break;
         case "phoneNumber":
@@ -248,20 +248,20 @@ export default function CreateContributorAccount() {
         lastName: formObj.lastName.value,
         phoneNumber: formObj.phoneNumber.value,
         password: formObj.password.value,
-        username: formObj.email.value
+        username: formObj.email.value,
       };
       dispatch(
         registerContributor(
           obj,
           () => {
-            navigate("/login");
+            setAlertObj({
+              open: true,
+              message: "Account Created Successfully",
+              isSuccess: true,
+            });
             setTimeout(() => {
-              setAlertObj({
-                open: true,
-                message: "Account Created Successfully",
-                isSuccess: true,
-              });
-            }, 100);
+              navigate("/login");
+            }, 500);
           },
           (errorMsg) => {
             setTimeout(() => {

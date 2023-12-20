@@ -41,8 +41,7 @@
         margin: 0 25px;
         height: 80px;
         position: relative;
-        box-shadow: 0em 0em 10px rgba(0, 0, 0, 0.9), inset 0px 0px 80px #8f8f8f;
-        &:hover{
+        &:hover {
           background-color: #f9f9f9;
         }
         .ic-card-content {
@@ -88,7 +87,7 @@
     .ic-org-feed-container {
       .ic-org-body-header {
         font-size: 20px;
-        font-weight: 600 ;;
+        font-weight: 600;
         padding: 15px 15px;
         color: $app-primary-color;
         display: flex;
@@ -99,8 +98,6 @@
         .ic-card {
           padding: 16px 20px;
           margin: 25px 10px;
-          box-shadow: 0em 0em 10px rgba(0, 0, 0, 0.9),
-            inset 0px 0px 80px #656565;
           .ic-card-content {
             display: flex;
             justify-content: flex-start;
@@ -116,4 +113,8 @@
       }
     }
   }
+}
+
+.ic-dark .ic-org-dashboard-container .ic-card {
+  box-shadow: 0em 0em 10px rgba(0, 0, 0, 0.9), inset 0px 0px 80px #8f8f8f;
 }

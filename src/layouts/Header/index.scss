@@ -2,7 +2,7 @@
 
 .ic-header-main-container {
   height: 80px;
-  box-shadow: -2em 1em 50px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #3f3f3f;
+  box-shadow: 0 5px 3px -5px grey;
   display: flex;
   justify-content: space-between;
 
@@ -61,4 +61,8 @@
       z-index: 1;
     }
   }
+}
+
+.ic-dark .ic-header-main-container {
+  box-shadow: -2em 1em 50px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #3f3f3f;
 }
