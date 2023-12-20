@@ -36,7 +36,7 @@
     }
     .ic-header-name {
       font-size: 36px;
-      font-weight: 600 ;;
+      font-weight: 600;
       color: $app-primary-color;
     }
   }
@@ -44,6 +44,9 @@
     display: flex;
     align-items: center;
 
+    .ic-dark-icon {
+      margin-right: 15px;
+    }
     .ic-signin {
       margin-right: 15px;
     }
@@ -64,5 +67,5 @@
 }
 
 .ic-dark .ic-header-main-container {
-  box-shadow: -2em 1em 50px rgba(0, 0, 0, 0.9), inset 0px 0px 100px #3f3f3f;
+  box-shadow: -2em 1em 21px rgb(202 202 202 / 90%), inset 0 0 11px #3f3f3f;
 }

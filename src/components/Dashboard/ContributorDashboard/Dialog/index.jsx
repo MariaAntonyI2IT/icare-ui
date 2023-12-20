@@ -20,7 +20,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import "./index.scss";
 import { Link } from "react-router-dom";
-import cover from './../../../../assets/cover.jpg';
+import cover from "./../../../../assets/cover.jpg";
 import Order from "./Order";
 
 export default function DialogModel(props) {
@@ -32,7 +32,10 @@ export default function DialogModel(props) {
   const [orderProduct, setOrderProduct] = useState();
 
   const onAcknowledgeClick = (product) => {
-    window.open(product.link, "_blank");
+    window.open(
+      `https://www.bigbasket.com/ps/?q=${encodeURIComponent(product.name)}`,
+      "_blank"
+    );
     setOrderProduct(product);
     setOrderDialogOpen(true);
   };
@@ -75,7 +78,7 @@ export default function DialogModel(props) {
       <>
         <StyledTableRow>
           <StyledTableCell component="th" scope="row">
-            <Link to={product.link} target="_blank">
+            <Link>
               {product.name} (in {product.unit})
             </Link>
           </StyledTableCell>
@@ -114,7 +117,7 @@ export default function DialogModel(props) {
           fullWidth={true}
           fullScreen={isMatch}
         >
-           <img src={cover} className="ic-cover" />
+          <img src={cover} className="ic-cover" />
           <div className="ic-org-progress-dialog-container">
             <div className="ic-org-body-header-container">
               <div className="ic-org-body-header">Request detail</div>

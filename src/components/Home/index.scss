@@ -113,8 +113,8 @@
           .ic-content-wrapper {
             padding-top: 20px;
             .ic-name {
-              font-size: 18px;
-              font-weight: 600;
+              font-size: 22px;
+              font-weight: 600 !important;
               padding: 0 10px 0 15px;
               white-space: nowrap;
               overflow: hidden;
@@ -138,8 +138,8 @@
               padding: 0 10px 15px 15px;
               .ic-org-createdby {
                 color: $app-primary-color;
-                font-size: 15px;
-                font-weight: 600;
+                font-size: 18px;
+                font-weight: 600 !important;
               }
 
               .ic-org-name {

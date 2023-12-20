@@ -8,6 +8,17 @@
   min-height: inherit;
   padding: 15px;
 
+  .ic-theme-icon {
+    position: absolute;
+    right: 22px;
+
+    svg {
+      height: 2rem;
+      width: 2rem;
+      color: $app-primary-color;
+    }
+  }
+
   .ic-header-container {
     display: inline-flex;
     justify-content: center;

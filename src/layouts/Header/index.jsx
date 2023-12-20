@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "./../../assets/logo.svg";
 import Button from "@mui/material/Button";
@@ -5,12 +6,14 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { clearProfile } from "./../../store/user/action";
 import Logout from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
-import { clearSession } from "./../../utils/session";
+import { clearSession, setSession } from "./../../utils/session";
 import { useNavigate } from "react-router-dom";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import "./index.scss";
 
 export default function Header({ isHome = false }) {
   const avatar = useSelector((state) => state.user.contributorProfile.avatar);
+  const [darkTheme, setDarkTheme] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,6 +21,22 @@ export default function Header({ isHome = false }) {
     clearSession();
     dispatch(clearProfile());
     navigate("/");
+  };
+
+  const onDarkMode = () => {
+    const isDarkMode = !darkTheme;
+    setDarkTheme(isDarkMode);
+    if (isDarkMode) {
+      setSession("theme", "dark");
+      if (!document.getElementById("root").classList.contains("ic-dark")) {
+        document.getElementById("root").classList.add("ic-dark");
+      }
+    } else {
+      setSession("theme", "light");
+      if (document.getElementById("root").classList.contains("ic-dark")) {
+        document.getElementById("root").classList.remove("ic-dark");
+      }
+    }
   };
 
   const onHomeBtnClick = () => {
@@ -46,6 +65,13 @@ export default function Header({ isHome = false }) {
       </div>
       {isHome ? (
         <div className="ic-profile">
+          <IconButton
+            className="ic-dark-icon"
+            size="large"
+            onClick={() => onDarkMode()}
+          >
+            <DarkModeIcon />
+          </IconButton>
           <Button
             className="ic-signin"
             variant="contained"
@@ -56,6 +82,13 @@ export default function Header({ isHome = false }) {
         </div>
       ) : (
         <div className="ic-profile">
+          <IconButton
+            className="ic-bck-icon"
+            size="large"
+            onClick={() => onDarkMode()}
+          >
+            <DarkModeIcon />
+          </IconButton>
           {avatar ? (
             <img
               src={avatar}

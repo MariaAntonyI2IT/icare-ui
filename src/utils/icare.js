@@ -20,8 +20,8 @@ export const categories = {
 };
 
 export const products = [
-  {id: 1,name: 'Soap',unit: 'Qty',min: 1,max: 10,category: categories.grocery,link: 'https://www.bigbasket.com/pd/10000415/bb-royal-rice-raw-sona-masoori-5-kg-bag/?nc=as'},
-  {id: 2,name: 'Rice',unit: 'Kg',min: 1,max: 5,category: categories.grocery,link: 'https://www.bigbasket.com/pd/40227231/cinthol-bath-soap-999-germ-protection-deodorant-complexion-original-100-g/?nc=as'},
+  {id: 1,name: 'Soap',unit: 'Qty',min: 1,max: 10,category: categories.grocery,link: 'https://www.bigbasket.com/pd/40227231/cinthol-bath-soap-999-germ-protection-deodorant-complexion-original-100-g/?nc=as'},
+  {id: 2,name: 'Rice',unit: 'Kg',min: 1,max: 5,category: categories.grocery,link: 'https://www.bigbasket.com/pd/10000415/bb-royal-rice-raw-sona-masoori-5-kg-bag/?nc=as'},
   {id: 3,name: 'Turmeric powder',unit: 'Gm',min: 1,max: 25,category: categories.grocery,link: 'https://www.bigbasket.com/pd/268037/mtr-powder-turmeric-100-g-pouch/?nc=as'},
   {id: 4,name: 'Pencil',unit: 'Qty',min: 1,max: 50,category: categories.stationery,link: 'https://www.bigbasket.com/pd/40010702/apsara-platinum-extra-dark-pencils-10-pcs/?nc=as'},
   {id: 5,name: 'NoteBook',unit: 'Qty',min: 1,max: 40,category: categories.stationery,link: 'https://www.bigbasket.com/pd/40125826/classmate-notebook-ruled-long-single-line-172-pages/?nc=as'},

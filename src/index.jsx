@@ -17,13 +17,24 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#1342ad",
-    }
+    },
   },
 });
 const token = getSession(appConfig.token);
+const userTheme = getSession("theme");
 if (!!token) {
   store.dispatch(updateToken(token));
 }
+if (userTheme && userTheme === "dark") {
+  if (!document.getElementById("root").classList.contains("ic-dark")) {
+    document.getElementById("root").classList.add("ic-dark");
+  }
+} else {
+  if (document.getElementById("root").classList.contains("ic-dark")) {
+    document.getElementById("root").classList.remove("ic-dark");
+  }
+}
+
 setupInterceptors(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
