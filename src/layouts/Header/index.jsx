@@ -83,7 +83,7 @@ export default function Header({ isHome = false }) {
       ) : (
         <div className="ic-profile">
           <IconButton
-            className="ic-bck-icon"
+            className="ic-dark-icon"
             size="large"
             onClick={() => onDarkMode()}
           >

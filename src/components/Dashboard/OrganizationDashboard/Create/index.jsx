@@ -312,13 +312,13 @@ export default function Create() {
       </div>
       <div className="ic-form-fields">
         <FormControl fullWidth={true}>
-          <InputLabel htmlFor="ngo">Request Type</InputLabel>
+          <InputLabel htmlFor="ngo">Organization Type</InputLabel>
           <Select
             defaultValue={formObj.type.value}
             value={formObj.type.value}
             error={!!formObj.type.error}
             id="ngo"
-            label="Request Type"
+            label="Organization Type"
             onChange={(e, item) => onTypeDdnChange(e, item)}
           >
             {ngoTypes.map((option, index) => {
