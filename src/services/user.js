@@ -38,8 +38,7 @@ export const createRequest = (data) =>
 export const fetchRequestList = (data) =>
   axios({
     method: 'post',
-    url: '/request-list',
-    data
+    url: '/request-list'
   });
 
 export const donateProductService = (data) =>
@@ -75,10 +74,11 @@ export const fetchOrganizationCompletedService = (id) =>
   });
 
 
-export const acknowledgeProductService = (id) =>
+export const acknowledgeProductService = (data) =>
   axios({
     method: 'post',
-    url: `/product-acknowledge?productId=${id}`
+    url: `/product-acknowledge`,
+    data
   });
 
 export const sendOtpService = (data) =>
@@ -111,6 +111,18 @@ export const createOrganizationAccountService = (data) =>
 
 export const verifyOrganizationAccountService = (id) =>
   axios({
-    method: 'get',
+    method: 'post',
     url: `/organization/verify-org-id?ngoId=${encodeURIComponent(id)}`
+  });
+
+export const getNotificationService = (id) =>
+  axios({
+    method: 'post',
+    url: `/notifications?userId=${id}`
+  });
+
+export const clearNotificationService = (id) =>
+  axios({
+    method: 'post',
+    url: `/notifications/clear?userId=${id}`
   });

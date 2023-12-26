@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
 import DialogModel from "./../Dialog";
-import VolunteerActivism from "@mui/icons-material/VolunteerActivism";
 import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
 import {
@@ -13,7 +11,6 @@ import {
   donateContributorRequest,
 } from "../../../../store/organization/action";
 import ShowAlert from "../../../../widgets/Alert";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { chips } from "../../../../utils/icare";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -64,7 +61,7 @@ export default function SearchComponent({ onDataChange }) {
     } else {
       dispatch(
         fetchContributorSearchRequest(
-          {},
+          contributorProfile.id,
           (data) => {
             onDataChange(data);
             setRequestData(data);
@@ -87,6 +84,7 @@ export default function SearchComponent({ onDataChange }) {
       productId: product.id,
       contributorId: contributorProfile.id,
       orderId: product.orderId,
+      organizationEmail: product.organizationEmail
     };
     dispatch(
       donateContributorRequest(

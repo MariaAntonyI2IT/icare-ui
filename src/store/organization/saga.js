@@ -56,7 +56,7 @@ function* fetchOrganizationCompletedRequest(action) {
 function* fetchContributorSearchRequest(action) {
   try {
     yield put(enableLoader());
-    const {data} = yield call(fetchRequestList,action.payload);
+    const {data} = yield call(fetchRequestList);
     action?.successCb(data);
     yield put(disableLoader());
   } catch(e) {

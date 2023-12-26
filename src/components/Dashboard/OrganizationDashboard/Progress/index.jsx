@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
 import DialogModel from "./../Dialog";
-import VolunteerActivism from "@mui/icons-material/VolunteerActivism";
 import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
 import {
@@ -108,9 +106,14 @@ export default function Progress({ onDataChange }) {
   };
 
   const ackProduct = (product) => {
+    const data = {
+      productId: product.id,
+      contributorEmail: product.contributedBy.email,
+    };
+
     dispatch(
       acknowledgeContributorRequest(
-        product.id,
+        data,
         () => {
           setAlertObj({
             open: true,

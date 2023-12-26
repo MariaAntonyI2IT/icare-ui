@@ -40,7 +40,7 @@ export const NGOForm = ({
           onClick={() => verifyNgoOrganization()}
           startIcon={loading && <RefreshIcon className="ic-spin" />}
         >
-          {loading ? "Loading" : "Verify"}
+          {loading ? "Loading" : "Validate"}
         </Button>
       </div>
     </>

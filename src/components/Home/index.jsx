@@ -4,13 +4,10 @@ import { useDispatch } from "react-redux";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Chip from "@mui/material/Chip";
-import IconButton from "@mui/material/IconButton";
-import VolunteerActivism from "@mui/icons-material/VolunteerActivism";
 import Search from "@mui/icons-material/Search";
 import { debounce } from "lodash";
 import { fetchContributorSearchRequest } from "../../store/organization/action";
 import ShowAlert from "../../widgets/Alert";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useNavigate } from "react-router-dom";
 import { chips } from "../../utils/icare";
 import InputLabel from "@mui/material/InputLabel";
@@ -62,7 +59,7 @@ export default function Home() {
     } else {
       dispatch(
         fetchContributorSearchRequest(
-          {},
+          undefined,
           (data) => {
             setRequestData(data);
             const filteredData = getFilteredRequestData(data, payload);

@@ -135,30 +135,6 @@ export default function DialogModel(props) {
                       fullWidth={true}
                     />
                   </div>
-                  {product.contributedBy.phoneNumber && (
-                    <div className="ic-form-fields">
-                      <TextField
-                        value={product.contributedBy.phoneNumber}
-                        label="Phone Number"
-                        variant="outlined"
-                        autoComplete="new-password"
-                        disabled={true}
-                        className={"ic-readOnly"}
-                        fullWidth={true}
-                      />
-                    </div>
-                  )}
-                  <div className="ic-form-fields">
-                    <TextField
-                      value={product.contributedBy.email}
-                      label="Mail"
-                      variant="outlined"
-                      autoComplete="new-password"
-                      disabled={true}
-                      className={"ic-readOnly"}
-                      fullWidth={true}
-                    />
-                  </div>
                   <div className="ic-form-fields">
                     <TextField
                       value={new Date(product.contributeDate).toDateString()}

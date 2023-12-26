@@ -82,13 +82,6 @@ export default function Header({ isHome = false }) {
         </div>
       ) : (
         <div className="ic-profile">
-          <IconButton
-            className="ic-dark-icon"
-            size="large"
-            onClick={() => onDarkMode()}
-          >
-            <DarkModeIcon />
-          </IconButton>
           {avatar ? (
             <img
               src={avatar}
@@ -104,6 +97,13 @@ export default function Header({ isHome = false }) {
               <AccountCircle />
             </IconButton>
           )}
+          <IconButton
+            className="ic-bck-icon"
+            size="large"
+            onClick={() => onDarkMode()}
+          >
+            <DarkModeIcon />
+          </IconButton>
           <IconButton
             className="ic-bck-icon"
             size="large"

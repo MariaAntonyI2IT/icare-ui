@@ -36,7 +36,10 @@ export default function DialogModel(props) {
       `https://www.bigbasket.com/ps/?q=${encodeURIComponent(product.name)}`,
       "_blank"
     );
-    setOrderProduct(product);
+    setOrderProduct({
+      ...product,
+      organizationEmail: requestData.organization.email
+    });
     setOrderDialogOpen(true);
   };
 
